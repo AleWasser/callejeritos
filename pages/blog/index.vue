@@ -1,0 +1,82 @@
+<template>
+    <v-container fluid mt-5>
+        <v-layout row wrap>
+            <v-flex xs12>
+                <v-card>
+                    <v-container fluid grid-list-xl>
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-img
+                                    src="http://thewallpaper.co/wp-content/uploads/2016/02/pure-black-german-shepherd-dog-wide-hd-wallpapers-for-background-cute-doggy-widescreen-1920x1080.jpg"
+                                    aspect-ratio="3"
+                                >
+                                    <v-layout row wrap align-center justify-start fill-height pl-5>
+                                        <v-flex xs12 class="white--text">
+                                            <h3
+                                                class="display-2 font-weight-bold"
+                                            >Entrada principal de prueba</h3>
+                                            <p class="subheading mb-0">Texto de entrada de prueba</p>
+                                            <v-btn round small color="amber darken-1" dark>Ver mas</v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-img>
+                            </v-flex>
+                            <v-flex xs6>
+                                <v-img
+                                    src="http://www.10wallpaper.com/wallpaper/1920x1080/1209/Lovely_Dogs-dog_photo_wallpaper_1920x1080.jpg"
+                                    aspect-ratio="2"
+                                >
+                                    <v-layout
+                                        row
+                                        wrap
+                                        align-start
+                                        justify-end
+                                        fill-height
+                                        pr-3
+                                        pt-3
+                                    >
+                                        <v-flex xs6 class="white--text text-xs-right">
+                                            <h6
+                                                class="title font-weight-bold"
+                                            >Entrada secundaria de prueba</h6>
+                                            <p class="subheading mb-0">Texto de entrada de prueba</p>
+                                            <v-btn round small color="amber darken-1" dark>Ver mas</v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-img>
+                            </v-flex>
+                            <v-flex xs6>
+                                <v-img
+                                    src="http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-full-hd-1920-1080-widescreen-awesome/wallpaper-photoshopped-cat-1920-x-1080-full-hd.jpg"
+                                    aspect-ratio="2"
+                                >
+                                    <v-layout
+                                        row
+                                        wrap
+                                        align-start
+                                        justify-end
+                                        fill-height
+                                        pr-3
+                                        pt-3
+                                    >
+                                        <v-flex xs6 class="white--text text-xs-right">
+                                            <h6
+                                                class="title font-weight-bold"
+                                            >Entrada secundaria de prueba</h6>
+                                            <p class="subheading mb-0">Texto de entrada de prueba</p>
+                                            <v-btn round small color="amber darken-1" dark>Ver mas</v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-img>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
+</template>
+
+<script>
+//TODO Efectos: Al hacer mouseover opacar la imagen y agrandar el titulo
+</script>

@@ -13,7 +13,7 @@
                 <v-card class="pa-5 mx-auto">
                     <v-card-title primary-title class="align-center justify-center">
                         <div>
-                            <h3 class="display-1 text-xs-center">Hablemos de Callejeritos</h3>
+                            <h3 class="display-2 text-xs-center">Hablemos de Callejeritos</h3>
                         </div>
                     </v-card-title>
                     <v-card-text>
