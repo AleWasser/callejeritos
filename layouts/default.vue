@@ -4,7 +4,7 @@
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Callejeritos Almirante Brown</v-toolbar-title>
         </v-toolbar>
-        <v-navigation-drawer v-model="drawer" :mini-variant="mini" absolute dark temporary>
+        <v-navigation-drawer v-model="drawer" :mini-variant="mini" absolute dark temporary app>
             <v-list class="pa-1">
                 <v-list-tile v-if="mini" @click.stop="mini = !mini">
                     <v-list-tile-action>
