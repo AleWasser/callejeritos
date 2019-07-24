@@ -5,15 +5,18 @@
                 <v-card>
                     <v-img
                         src="http://thewallpaper.co/wp-content/uploads/2016/02/pure-black-german-shepherd-dog-wide-hd-wallpapers-for-background-cute-doggy-widescreen-1920x1080.jpg"
-                        aspect-ratio="3"
+                        :aspect-ratio="$vuetify.breakpoint.smAndDown ? 1.5 : 2.5"
                     ></v-img>
                     <v-card-title primary-title class="pb-0">
                         <div>
-                            <h2 class="display-3 mb-1">Titulo de prueba</h2>
-                            <p class="subheading">description corta</p>
+                            <h2
+                                class="mb-1"
+                                :class="{'display-1': $vuetify.breakpoint.smAndDown, 'display-3 ': $vuetify.breakpoint.mdAndUp}"
+                            >Titulo de prueba</h2>
+                            <p class="subheading pl-3">description corta</p>
                         </div>
                     </v-card-title>
-                    <v-card-text class="pa-4">
+                    <v-card-text class="px-4 pt-0">
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem itaque similique aperiam dolorum porro quis fugit autem. Quisquam, deleniti dolorum? Voluptatum ullam corrupti facere repellendus laborum obcaecati, porro est aut?
                             Atque reprehenderit provident quis eligendi excepturi officia illum ipsa! Reiciendis mollitia deserunt optio quibusdam, blanditiis sapiente libero doloremque veniam suscipit modi in quasi voluptates. Atque eligendi vel officiis aperiam qui.
@@ -34,18 +37,27 @@
                         </div>
                     </v-card-title>
                     <v-card-text>
-                        <v-list class="pa-4">
-                            <v-list-tile>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Titulo</v-list-tile-title>
-                                    <v-list-tile-sub-title>Comentario de prueba</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                                <v-list-tile-action>
-                                    <v-list-tile-action-text>Fecha</v-list-tile-action-text>
-                                </v-list-tile-action>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                        </v-list>
+                        <v-card class="mb-2">
+                            <v-card-title primary-title>
+                                <p class="subtitle-1 font-weight-medium mb-0">Nombre usuario</p>
+                            </v-card-title>
+                            <v-card-text class="pt-0">
+                                <p
+                                    class="body-1"
+                                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore odio praesentium, itaque ab vero suscipit adipisci necessitatibus quo assumenda cumque blanditiis tenetur quibusdam maxime accusamus repudiandae repellat est asperiores fuga!Vitae odit quidem eveniet quasi possimus, iusto minima? Tempora voluptatum, consequatur ipsam, deserunt id dicta tempore recusandae saepe commodi exercitationem debitis fugiat aspernatur dolorum reprehenderit, ea voluptas at voluptatibus laborum.</p>
+                            </v-card-text>
+                        </v-card>
+                        <v-divider></v-divider>
+                        <v-card>
+                            <v-card-title primary-title>
+                                <p class="subtitle-1 font-weight-medium mb-0">Nombre usuario</p>
+                            </v-card-title>
+                            <v-card-text class="pt-0">
+                                <p
+                                    class="body-1"
+                                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore odio praesentium, itaque ab vero suscipit adipisci necessitatibus quo assumenda cumque blanditiis tenetur quibusdam maxime accusamus repudiandae repellat est asperiores fuga!Vitae odit quidem eveniet quasi possimus, iusto minima? Tempora voluptatum, consequatur ipsam, deserunt id dicta tempore recusandae saepe commodi exercitationem debitis fugiat aspernatur dolorum reprehenderit, ea voluptas at voluptatibus laborum.</p>
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
                     <v-card-actions>
                         <p>//Formulario para nuevo comentario</p>
@@ -57,14 +69,5 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            id: ""
-        };
-    },
-    mounted() {
-        this.id = this.$route.params.id;
-    }
-};
+export default {};
 </script>
