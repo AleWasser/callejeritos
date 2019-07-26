@@ -7,10 +7,10 @@
             :class="{'px-0': $vuetify.breakpoint.smAndDown, 'px-5': $vuetify.breakpoint.mdAndUp}"
             align-start
             elevation-24
-            style="margin-top: -65px;"
+            style="margin-top: -205px;"
         >
             <v-flex xs12>
-                <v-card class="pa-5 mx-auto">
+                <v-card class="px-5 mx-auto">
                     <v-card-title primary-title class="align-center justify-center">
                         <div>
                             <h3 class="display-2 text-xs-center">Hablemos de Callejeritos</h3>
