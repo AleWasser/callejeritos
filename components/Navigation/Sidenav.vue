@@ -54,7 +54,8 @@ export default {
             mini: false,
             items: [
                 { icon: "home", title: "Home", link: "/" },
-                { icon: "feedback", title: "Blog", link: "/blog" }
+                { icon: "feedback", title: "Blog", link: "/blog" },
+                { icon: "favorite", title: "Adopciones", link: "/adopciones" }
             ]
         };
     }
