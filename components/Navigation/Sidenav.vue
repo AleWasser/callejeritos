@@ -3,7 +3,14 @@
         <v-toolbar dense flat fixed light color="transparent">
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
         </v-toolbar>
-        <v-navigation-drawer v-model="drawer" :mini-variant="mini" dark temporary app>
+        <v-navigation-drawer
+            v-model="drawer"
+            :mini-variant="mini"
+            dark
+            temporary
+            app
+            :width="$vuetify.breakpoint.smAndDown ? 220 : 256"
+        >
             <v-list class="pa-1">
                 <v-list-tile v-if="mini" @click.stop="mini = !mini">
                     <v-list-tile-action>
@@ -13,7 +20,7 @@
 
                 <v-list-tile avatar tag="div">
                     <v-list-tile-content>
-                        <v-list-tile-title>Callejeritos Almirante Brown</v-list-tile-title>
+                        <v-list-tile-title>Callejeritos</v-list-tile-title>
                     </v-list-tile-content>
 
                     <v-list-tile-action>

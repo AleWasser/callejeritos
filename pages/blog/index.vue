@@ -1,8 +1,14 @@
 <template>
-    <v-container fluid mt-5>
+    <v-container
+        fluid
+        :class="{'mt-3':$vuetify.breakpoint.smAndDown, 'mt-5': $vuetify.breakpoint.mdAndUp}"
+    >
         <v-layout row wrap>
             <v-flex xs12>
-                <h1 class="display-4 text-xs-center my-4">Blog</h1>
+                <h1
+                    class="text-xs-center my-4"
+                    :class="{'display-2': $vuetify.breakpoint.smAndDown, 'display-4':$vuetify.breakpoint.mdAndUp}"
+                >Blog</h1>
                 <v-card>
                     <v-container fluid grid-list-md>
                         <v-layout row wrap>

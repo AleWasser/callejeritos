@@ -1,10 +1,21 @@
 <template>
-    <v-container fluid mt-5>
-        <v-layout>
+    <v-container
+        fluid
+        :class="{'mt-3':$vuetify.breakpoint.smAndDown, 'mt-5': $vuetify.breakpoint.mdAndUp}"
+    >
+        <v-layout row wrap>
             <v-flex xs12>
-                <v-card height="500">
-                    <v-container grid-list-md>
-                        <v-layout row wrap my-4>
+                <h1
+                    class="text-xs-center my-4"
+                    :class="{'display-2': $vuetify.breakpoint.smAndDown, 'display-4':$vuetify.breakpoint.mdAndUp}"
+                >Adopciones</h1>
+                <v-card>
+                    <v-container
+                        fluid
+                        grid-list-md
+                        :class="{'pa-0': $vuetify.breakpoint.smAndDown}"
+                    >
+                        <v-layout row wrap>
                             <nuxt-link tag="v-flex" to="#" class="xs12 md4 pointer">
                                 <v-hover>
                                     <v-card slot-scope="{ hover }">
@@ -12,7 +23,11 @@
                                             src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2016%2F01%2F256905-animals-dog-puppies.jpg&f=1"
                                             aspect-ratio="1"
                                         >
-                                            <v-expand-transition>
+                                            <h3
+                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                class="display-2 font-weight-bold pl-2"
+                                            >Perros</h3>
+                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
@@ -30,7 +45,11 @@
                                             src="http://onehdwallpaper.com/wp-content/uploads/2015/07/Beautiful-Cat-Full-HD-Wallpapers.jpg"
                                             aspect-ratio="1"
                                         >
-                                            <v-expand-transition>
+                                            <h3
+                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                class="display-2 font-weight-bold pl-2"
+                                            >Gatos</h3>
+                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
@@ -48,7 +67,11 @@
                                             src="https://cdn.wallpapersafari.com/65/47/E2OTot.jpg"
                                             aspect-ratio="1"
                                         >
-                                            <v-expand-transition>
+                                            <h3
+                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                class="display-2 font-weight-bold pl-2"
+                                            >Otras mascotas</h3>
+                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
