@@ -10,6 +10,7 @@
 
 <script>
 import Sidenav from "~/components/Navigation/Sidenav.vue";
+
 export default {
     components: {
         "app-sidenav": Sidenav
