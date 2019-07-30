@@ -96,11 +96,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     computed: mapGetters({
         getCount: "adopciones/getCount"
-    })
+    }),
+    methods: {},
+    mounted() {
+        this.$store.dispatch("nuxtServerInit");
+    }
 };
 </script>
 
