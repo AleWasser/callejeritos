@@ -7,5 +7,11 @@ export default {
   },
   getPerros(state) {
     return state.perros;
+  },
+  getGatos(state) {
+    return state.gatos;
+  },
+  getOtros(state) {
+    return state.otros;
   }
 }

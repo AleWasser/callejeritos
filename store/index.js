@@ -7,24 +7,24 @@ export const state = () => ({
 });
 
 export const mutations = {
-  setBreakpoint({
-    state
-  }, breakpoint) {
+  setBreakpoint(state, breakpoint) {
+    console.log(breakpoint);
     state.breakpoint = breakpoint;
   }
 }
 
-// export const actions = {
-//   async nuxtServerInit({
-//     commit
-//   }, context) {
-//     return db.ref('data/mascotas')
-//       .once('value')
-//       .then(res => {
-//         commit('setAdopciones', res.val());
-//       });
-//   }
-// }
+export const actions = {
+  async nuxtServerInit({
+    commit
+  }, context) {
+    return db.ref('data/mascotas')
+      .once('value')
+      .then(res => {
+        commit('adopciones/setAdopciones', res.val());
+      })
+      .catch(err => console.log(err));
+  }
+}
 
 export const getters = {
   getBreakpoint(state) {

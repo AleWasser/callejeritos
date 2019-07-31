@@ -9,7 +9,11 @@
                 <v-card>
                     <v-container fluid grid-list-md :class="{'pa-0': getBreakpoint.smAndDown}">
                         <v-layout row wrap>
-                            <nuxt-link tag="v-flex" to="#" class="xs12 md4 pointer">
+                            <nuxt-link
+                                tag="v-flex"
+                                to="/adopciones/perros"
+                                class="xs12 md4 pointer"
+                            >
                                 <v-hover>
                                     <v-card slot-scope="{ hover }">
                                         <v-img
@@ -31,7 +35,7 @@
                                     </v-card>
                                 </v-hover>
                             </nuxt-link>
-                            <nuxt-link tag="v-flex" to="#" class="xs12 md4 pointer">
+                            <nuxt-link tag="v-flex" to="/adopciones/gatos" class="xs12 md4 pointer">
                                 <v-hover>
                                     <v-card slot-scope="{ hover }">
                                         <v-img
@@ -53,7 +57,7 @@
                                     </v-card>
                                 </v-hover>
                             </nuxt-link>
-                            <nuxt-link tag="v-flex" to="#" class="xs12 md4 pointer">
+                            <nuxt-link tag="v-flex" to="/adopciones/otros" class="xs12 md4 pointer">
                                 <v-hover>
                                     <v-card slot-scope="{ hover }">
                                         <v-img
