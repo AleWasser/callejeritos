@@ -9,7 +9,7 @@
             dark
             temporary
             app
-            :width="$vuetify.breakpoint.smAndDown ? 220 : 256"
+            :width="getBreakpoint.smAndDown ? 220 : 256"
         >
             <v-list class="pa-1">
                 <v-list-tile v-if="mini" @click.stop="mini = !mini">
@@ -65,6 +65,11 @@ export default {
                 { icon: "favorite", title: "Adopciones", link: "/adopciones" }
             ]
         };
+    },
+    computed: {
+        getBreakpoint() {
+            return this.$store.getters.getBreakpoint;
+        }
     }
 };
 </script>

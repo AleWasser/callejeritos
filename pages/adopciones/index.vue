@@ -1,20 +1,13 @@
 <template>
-    <v-container
-        fluid
-        :class="{'mt-3':$vuetify.breakpoint.smAndDown, 'mt-5': $vuetify.breakpoint.mdAndUp}"
-    >
+    <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-5': getBreakpoint.mdAndUp}">
         <v-layout row wrap>
             <v-flex xs12>
                 <h1
                     class="text-xs-center my-4"
-                    :class="{'display-2': $vuetify.breakpoint.smAndDown, 'display-4':$vuetify.breakpoint.mdAndUp}"
+                    :class="{'display-2': getBreakpoint.smAndDown, 'display-4':getBreakpoint.mdAndUp}"
                 >Adopciones</h1>
                 <v-card>
-                    <v-container
-                        fluid
-                        grid-list-md
-                        :class="{'pa-0': $vuetify.breakpoint.smAndDown}"
-                    >
+                    <v-container fluid grid-list-md :class="{'pa-0': getBreakpoint.smAndDown}">
                         <v-layout row wrap>
                             <nuxt-link tag="v-flex" to="#" class="xs12 md4 pointer">
                                 <v-hover>
@@ -24,10 +17,10 @@
                                             aspect-ratio="1"
                                         >
                                             <h3
-                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                v-if="getBreakpoint.smAndDown"
                                                 class="display-2 font-weight-bold pl-2"
                                             >Perros</h3>
-                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
+                                            <v-expand-transition v-if="getBreakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
@@ -46,10 +39,10 @@
                                             aspect-ratio="1"
                                         >
                                             <h3
-                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                v-if="getBreakpoint.smAndDown"
                                                 class="display-2 font-weight-bold pl-2"
                                             >Gatos</h3>
-                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
+                                            <v-expand-transition v-if="getBreakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
@@ -68,10 +61,10 @@
                                             aspect-ratio="1"
                                         >
                                             <h3
-                                                v-if="$vuetify.breakpoint.smAndDown"
+                                                v-if="getBreakpoint.smAndDown"
                                                 class="display-2 font-weight-bold pl-2"
                                             >Otras mascotas</h3>
-                                            <v-expand-transition v-if="$vuetify.breakpoint.mdAndUp">
+                                            <v-expand-transition v-if="getBreakpoint.mdAndUp">
                                                 <div
                                                     v-if="hover"
                                                     class="d-flex transition-fast-in-fast-out yellow darken-2 v-card--reveal display-3 white--text"
@@ -99,12 +92,9 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
     computed: mapGetters({
-        getCount: "adopciones/getCount"
-    }),
-    methods: {},
-    mounted() {
-        this.$store.dispatch("nuxtServerInit");
-    }
+        getCount: "adopciones/getCount",
+        getBreakpoint: "getBreakpoint"
+    })
 };
 </script>
 

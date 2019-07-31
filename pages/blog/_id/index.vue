@@ -5,13 +5,13 @@
                 <v-card>
                     <v-img
                         src="http://thewallpaper.co/wp-content/uploads/2016/02/pure-black-german-shepherd-dog-wide-hd-wallpapers-for-background-cute-doggy-widescreen-1920x1080.jpg"
-                        :aspect-ratio="$vuetify.breakpoint.smAndDown ? 1.5 : 2.5"
+                        :aspect-ratio="getBreakpoint.smAndDown ? 1.5 : 2.5"
                     ></v-img>
                     <v-card-title primary-title class="pb-0">
                         <div>
                             <h2
                                 class="mb-1"
-                                :class="{'display-1': $vuetify.breakpoint.smAndDown, 'display-3 ': $vuetify.breakpoint.mdAndUp}"
+                                :class="{'display-1': getBreakpoint.smAndDown, 'display-3 ': getBreakpoint.mdAndUp}"
                             >Titulo de prueba</h2>
                             <p class="subheading pl-3">description corta</p>
                         </div>
@@ -69,5 +69,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+    computed: {
+        getBreakpoint() {
+            return this.$store.getters.getBreakpoint;
+        }
+    }
+};
 </script>

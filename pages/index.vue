@@ -4,7 +4,7 @@
         <v-layout
             row
             wrap
-            :class="{'px-0': $vuetify.breakpoint.smAndDown, 'px-5': $vuetify.breakpoint.mdAndUp}"
+            :class="{'px-0': getBreakpoint.smAndDown, 'px-5': getBreakpoint.mdAndUp}"
             align-start
             elevation-24
             style="margin-top: -205px;"
@@ -71,3 +71,12 @@
     </v-container>
 </template>
 
+<script>
+export default {
+    computed: {
+        getBreakpoint() {
+            return this.$store.getters.getBreakpoint;
+        }
+    }
+};
+</script>

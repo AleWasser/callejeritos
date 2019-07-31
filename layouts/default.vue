@@ -14,6 +14,9 @@ import Sidenav from "~/components/Navigation/Sidenav.vue";
 export default {
     components: {
         "app-sidenav": Sidenav
+    },
+    mounted() {
+        this.$store.commit("setBreakpoint", this.$vuetify.breakpoint);
     }
 };
 </script>
