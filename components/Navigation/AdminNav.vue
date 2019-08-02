@@ -36,9 +36,16 @@ export default {
             drawer: true,
             mini: false,
             items: [
-                { icon: "home", title: "Home", link: "/" },
-                { icon: "feedback", title: "Blog", link: "/blog" },
-                { icon: "favorite", title: "Adopciones", link: "/adopciones" }
+                {
+                    icon: "dashboard",
+                    title: "Dashboard",
+                    link: "/admin/dashboard"
+                },
+                {
+                    icon: "table_chart",
+                    title: "Adopciones",
+                    link: "/admin/adopciones"
+                }
             ]
         };
     },

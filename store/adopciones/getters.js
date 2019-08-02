@@ -5,6 +5,9 @@ export default {
       gatos: state.gatos.length
     };
   },
+  getAdopciones(state) {
+    return [...state.perros, ...state.gatos, ...state.otros];
+  },
   getPerros(state) {
     return state.perros;
   },
