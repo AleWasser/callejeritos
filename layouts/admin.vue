@@ -1,13 +1,9 @@
 <template>
     <v-app>
-        <v-container fluid>
-            <v-layout row>
-                <v-flex xs3>
-                    <app-nav></app-nav>
-                </v-flex>
-                <v-flex xs9>
-                    <nuxt />
-                </v-flex>
+        <app-nav></app-nav>
+        <v-container fluid class="mt-5">
+            <v-layout row wrap>
+                <nuxt />
             </v-layout>
         </v-container>
     </v-app>

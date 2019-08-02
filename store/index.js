@@ -8,7 +8,6 @@ export const state = () => ({
 
 export const mutations = {
   setBreakpoint(state, breakpoint) {
-    console.log(breakpoint);
     state.breakpoint = breakpoint;
   }
 }

@@ -16,5 +16,8 @@ export default {
   },
   getOtros(state) {
     return state.otros;
+  },
+  getCategorias(state) {
+    return state.categorias;
   }
 }

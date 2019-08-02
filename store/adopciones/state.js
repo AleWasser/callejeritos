@@ -1,5 +1,6 @@
 export default () => ({
   perros: [],
   gatos: [],
-  otros: []
+  otros: [],
+  categorias: ["perros", "gatos", "otros"]
 });
