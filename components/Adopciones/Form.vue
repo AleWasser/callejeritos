@@ -59,7 +59,7 @@ export default {
             let data = {
                 id: this.mascotaId,
                 nombre: this.mascotaNombre,
-                categoria: this.categoria
+                categoria: this.mascotaCategoria
             };
             this.createMascota(data);
         }

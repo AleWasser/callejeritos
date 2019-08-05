@@ -1,6 +1,9 @@
 export default {
   setAdopciones(
     state, data) {
+    state.perros = [];
+    state.gatos = [];
+    state.otros = [];
     for (let key in data.perros) {
       const item = data.perros[key];
       item.id = key;
