@@ -1,5 +1,6 @@
 import {
-  db
+  db,
+  storage
 } from '~/plugins/firebase.js';
 
 export default {
@@ -9,7 +10,15 @@ export default {
     return db.ref(`data/mascotas/${data.categoria}`)
       .push(data)
       .then(res => {
-        dispatch('storeMascotas');
+        if (data.imagen) {
+          data.id = res.key;
+          dispatch('uploadImage', {
+            storageRef: `imagenes/adopciones/${data.categoria}/${data.id}`,
+            data: data
+          });
+        } else {
+          dispatch('storeMascotas');
+        }
       })
       .catch(err => console.log(err));
   },
@@ -36,7 +45,8 @@ export default {
             .update({
               id: data.id,
               categoria: data.categoria,
-              nombre: data.nombre
+              nombre: data.nombre,
+              imageUrl: data.imageUrl
             })
             .then(() => {
               dispatch('storeMascotas');
@@ -50,6 +60,35 @@ export default {
   }, data) {
     return db.ref(`data/mascotas/${data.categoria}/${data.id}`)
       .remove()
+      .then(() => {
+        dispatch('storeMascotas');
+      })
+      .catch(err => console.error(err))
+  },
+  uploadImage({
+    dispatch
+  }, payload) {
+    const task = storage.ref(payload.storageRef).put(payload.data.imagen);
+    task.on('state_changed',
+      snapshot => {},
+      err => console.error(err),
+      () => {
+        task.snapshot.ref.getDownloadURL()
+          .then(url => {
+            payload.data.imageUrl = url;
+            dispatch('setImage', {
+              data: payload.data
+            });
+          });
+      });
+  },
+  setImage({
+    dispatch
+  }, payload) {
+    return db.ref(`data/mascotas/${payload.data.categoria}/${payload.data.id}`)
+      .update({
+        imageUrl: payload.data.imageUrl
+      })
       .then(() => {
         dispatch('storeMascotas');
       })

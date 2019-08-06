@@ -82,7 +82,7 @@
                             <v-flex xs12 mt-3>
                                 <h3
                                     class="display-1"
-                                >Mascotas en adopcion: {{getCount.perros + getCount.gatos}}</h3>
+                                >Mascotas en adopcion: {{getCount.perros + getCount.gatos + getCount.otros}}</h3>
                             </v-flex>
                         </v-layout>
                     </v-container>

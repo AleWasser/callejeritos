@@ -2,7 +2,8 @@ export default {
   getCount(state) {
     return {
       perros: state.perros.length,
-      gatos: state.gatos.length
+      gatos: state.gatos.length,
+      otros: state.otros.length
     };
   },
   getAdopciones(state) {

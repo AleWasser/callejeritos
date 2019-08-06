@@ -6,6 +6,19 @@
                 <v-flex xs12>
                     <v-text-field label="Nombre" v-model="datos.nombre"></v-text-field>
                 </v-flex>
+                <v-flex xs12>
+                    <v-img :src="imageUrl"></v-img>
+                </v-flex>
+                <v-flex xs12>
+                    <input
+                        type="file"
+                        class="d-none"
+                        ref="fileInput"
+                        accept="image/*"
+                        @change="onFilePicked"
+                    />
+                    <v-btn raised color="info" @click="onPickFile">Seleccionar una imagen</v-btn>
+                </v-flex>
                 <v-flex xs12 d-flex>
                     <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
                 </v-flex>
@@ -44,6 +57,12 @@ export default {
             required: false
         }
     },
+    data() {
+        return {
+            imageUrl: "",
+            image: null
+        };
+    },
     methods: {
         ...mapActions({
             createMascota: "adopciones/createMascota",
@@ -52,13 +71,29 @@ export default {
         }),
         onSubmit() {
             if (this.datos.tipo == "create") {
-                this.createMascota(this.datos);
+                this.createMascota({ ...this.datos, imagen: this.image });
             } else if (this.datos.tipo == "edit") {
                 let datos = { ...this.datos, deleteData: this.categoria };
                 this.editMascota(datos);
             } else {
                 this.deleteMascota(this.datos);
             }
+        },
+        onPickFile() {
+            this.$refs.fileInput.click();
+        },
+        onFilePicked(event) {
+            const files = event.target.files;
+            let filename = files[0].name;
+            if (filename.lastIndexOf(".") <= 0) {
+                return alert("Por favor, ingresa un archivo valido.");
+            }
+            const fileReader = new FileReader();
+            fileReader.addEventListener("load", () => {
+                this.imageUrl = fileReader.result;
+            });
+            fileReader.readAsDataURL(files[0]);
+            this.image = files[0];
         }
     },
     computed: {
