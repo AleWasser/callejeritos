@@ -4,7 +4,13 @@
             <v-card-title primary-title>
                 <h3 class="display-1">Adopciones</h3>
                 <v-spacer></v-spacer>
-                <v-btn fab icon color="success" class="justify-end" @click="openAddDialog">
+                <v-btn
+                    fab
+                    icon
+                    color="success"
+                    class="justify-end"
+                    @click="openAddDialog('create')"
+                >
                     <v-icon>add</v-icon>
                 </v-btn>
             </v-card-title>
@@ -20,7 +26,10 @@
                             class="mr-2"
                             @click="openEditDialog('edit',props.item.id, props.item.nombre, props.item.categoria)"
                         >edit</v-icon>
-                        <v-icon small>delete</v-icon>
+                        <v-icon
+                            small
+                            @click="openDeleteDialog('delete', props.item.id, props.item.categoria)"
+                        >delete</v-icon>
                     </td>
                 </template>
             </v-data-table>
@@ -38,7 +47,11 @@
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
-                    <app-adopcion-form :datosAdopcion="datosAdopcion" :categoria="deleteData"></app-adopcion-form>
+                    <app-adopcion-form
+                        :close="closeDialog"
+                        :datosAdopcion="datosAdopcion"
+                        :categoria="deleteData"
+                    ></app-adopcion-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -76,6 +89,7 @@ export default {
                 }
             ],
             dialog: false,
+            deleteDialog: false,
             datosAdopcion: {},
             dialogType: "create",
             deleteData: ""
@@ -90,13 +104,16 @@ export default {
         },
         openEditDialog(tipo, id, nombre, categoria) {
             this.dialog = true;
-            let borrarCategoria = categoria;
-            this.deleteData = borrarCategoria;
+            this.deleteData = categoria;
             this.datosAdopcion = { tipo, id, nombre, categoria };
         },
-        openAddDialog() {
+        openDeleteDialog(tipo, id, categoria) {
             this.dialog = true;
-            this.datosAdopcion = {};
+            this.datosAdopcion = { tipo, id, categoria };
+        },
+        openAddDialog(tipo) {
+            this.dialog = true;
+            this.datosAdopcion = { tipo };
         }
     }
 };

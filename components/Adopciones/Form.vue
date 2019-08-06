@@ -1,7 +1,7 @@
 <template>
-    <form action="#" @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
         <input type="hidden" name="id" v-model="datos.id" />
-        <v-container grid-list-xs>
+        <v-container grid-list-xs v-if="datos.tipo != 'delete'">
             <v-layout row wrap>
                 <v-flex xs12>
                     <v-text-field label="Nombre" v-model="datos.nombre"></v-text-field>
@@ -10,12 +10,17 @@
                     <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
                 </v-flex>
             </v-layout>
-            <pre>
-        {{categoria}}
-    </pre>
+        </v-container>
+        <v-container grid-list-xs v-else>
+            <v-layout row wrap>
+                <v-flex xs12 class="text-xs-center">
+                    <p class="subheading font-weight-medium">¿Esta seguro de eliminar esta mascota?</p>
+                </v-flex>
+            </v-layout>
         </v-container>
         <v-card-actions class="justify-center">
-            <v-btn color="success" type="submit">Enviar</v-btn>
+            <v-btn color="success" type="submit" @click="close" v-if="datos.tipo != 'delete'">Enviar</v-btn>
+            <v-btn color="error" type="submit" @click="close" v-else>Eliminar</v-btn>
         </v-card-actions>
     </form>
 </template>
@@ -34,22 +39,25 @@ export default {
             required: false,
             default: ""
         },
-        closeDialog: {
-            type: Boolean,
+        close: {
+            type: Function,
             required: false
         }
     },
     methods: {
         ...mapActions({
             createMascota: "adopciones/createMascota",
-            editMascota: "adopciones/editMascotas"
+            editMascota: "adopciones/editMascota",
+            deleteMascota: "adopciones/deleteMascota"
         }),
         onSubmit() {
             if (this.datos.tipo == "create") {
                 this.createMascota(this.datos);
-            } else {
+            } else if (this.datos.tipo == "edit") {
                 let datos = { ...this.datos, deleteData: this.categoria };
                 this.editMascota(datos);
+            } else {
+                this.deleteMascota(this.datos);
             }
         }
     },

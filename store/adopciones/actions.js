@@ -23,7 +23,7 @@ export default {
       })
       .catch(err => console.log(err));
   },
-  editMascotas({
+  editMascota({
     dispatch
   }, data) {
     return db.ref(`data/mascotas/${data.deleteData}/${data.id}`)
@@ -44,5 +44,15 @@ export default {
             .catch(err => console.error(err));
         }
       });
+  },
+  deleteMascota({
+    dispatch
+  }, data) {
+    return db.ref(`data/mascotas/${data.categoria}/${data.id}`)
+      .remove()
+      .then(() => {
+        dispatch('storeMascotas');
+      })
+      .catch(err => console.error(err));
   }
 }
