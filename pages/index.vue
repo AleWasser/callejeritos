@@ -73,6 +73,7 @@
 
 <script>
 export default {
+    layout: "landing",
     computed: {
         getBreakpoint() {
             return this.$store.getters.getBreakpoint;

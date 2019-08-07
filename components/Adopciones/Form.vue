@@ -7,7 +7,7 @@
                     <v-text-field label="Nombre" v-model="datos.nombre"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                    <v-img :src="imageUrl"></v-img>
+                    <v-img :src="datos.imageUrl" v-if="datos.imageUrl"></v-img>
                 </v-flex>
                 <v-flex xs12>
                     <input
@@ -73,7 +73,11 @@ export default {
             if (this.datos.tipo == "create") {
                 this.createMascota({ ...this.datos, imagen: this.image });
             } else if (this.datos.tipo == "edit") {
-                let datos = { ...this.datos, deleteData: this.categoria };
+                let datos = {
+                    ...this.datos,
+                    imagen: this.image,
+                    deleteData: this.categoria
+                };
                 this.editMascota(datos);
             } else {
                 this.deleteMascota(this.datos);
@@ -90,7 +94,7 @@ export default {
             }
             const fileReader = new FileReader();
             fileReader.addEventListener("load", () => {
-                this.imageUrl = fileReader.result;
+                this.datos.imageUrl = fileReader.result;
             });
             fileReader.readAsDataURL(files[0]);
             this.image = files[0];

@@ -1,11 +1,7 @@
 <template>
     <v-app>
         <app-sidenav></app-sidenav>
-        <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-5': getBreakpoint.mdAndUp}">
-            <v-layout row wrap>
-                <nuxt />
-            </v-layout>
-        </v-container>
+        <nuxt />
         <v-footer>
             <span>&copy; 2019</span>
         </v-footer>
@@ -13,17 +9,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 import Sidenav from "~/components/Navigation/Sidenav.vue";
 
 export default {
     components: {
         "app-sidenav": Sidenav
     },
-    computed: mapGetters({
-        getBreakpoint: "getBreakpoint"
-    }),
     mounted() {
         this.$store.commit("setBreakpoint", this.$vuetify.breakpoint);
     }

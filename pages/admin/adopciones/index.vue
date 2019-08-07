@@ -24,11 +24,11 @@
                         <v-icon
                             small
                             class="mr-2"
-                            @click="openEditDialog('edit',props.item.id, props.item.nombre, props.item.categoria)"
+                            @click="openEditDialog('edit',props.item.id, props.item.nombre, props.item.categoria, props.item.imageUrl)"
                         >edit</v-icon>
                         <v-icon
                             small
-                            @click="openDeleteDialog('delete', props.item.id, props.item.categoria)"
+                            @click="openDeleteDialog('delete', props.item.id, props.item.categoria, props.item.imageUrl)"
                         >delete</v-icon>
                     </td>
                 </template>
@@ -102,18 +102,18 @@ export default {
         closeDialog() {
             this.dialog = false;
         },
-        openEditDialog(tipo, id, nombre, categoria) {
+        openEditDialog(tipo, id, nombre, categoria, imageUrl) {
             this.dialog = true;
             this.deleteData = categoria;
-            this.datosAdopcion = { tipo, id, nombre, categoria };
+            this.datosAdopcion = { tipo, id, nombre, categoria, imageUrl };
         },
-        openDeleteDialog(tipo, id, categoria) {
+        openDeleteDialog(tipo, id, categoria, imageUrl) {
             this.dialog = true;
-            this.datosAdopcion = { tipo, id, categoria };
+            this.datosAdopcion = { tipo, id, categoria, imageUrl };
         },
         openAddDialog(tipo) {
             this.dialog = true;
-            this.datosAdopcion = { tipo };
+            this.datosAdopcion = { tipo, imageUrl: "" };
         }
     }
 };

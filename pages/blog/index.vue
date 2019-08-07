@@ -1,6 +1,5 @@
 <template>
-    <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-5': getBreakpoint.mdAndUp}">
-        <v-layout row wrap>
+
             <v-flex xs12>
                 <h1
                     class="text-xs-center my-4"
@@ -87,8 +86,7 @@
                     </v-container>
                 </v-card>
             </v-flex>
-        </v-layout>
-    </v-container>
+
 </template>
 
 <script>

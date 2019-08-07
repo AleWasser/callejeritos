@@ -13,7 +13,6 @@ export default {
         if (data.imagen) {
           data.id = res.key;
           dispatch('uploadImage', {
-            storageRef: `imagenes/adopciones/${data.categoria}/${data.id}`,
             data: data
           });
         } else {
@@ -46,9 +45,14 @@ export default {
               id: data.id,
               categoria: data.categoria,
               nombre: data.nombre,
-              imageUrl: data.imageUrl
+              imageUrl: data.imageUrl || null
             })
             .then(() => {
+              if (data.imagen) {
+                dispatch('uploadImage', {
+                  data
+                });
+              }
               dispatch('storeMascotas');
             })
             .catch(err => console.error(err));
@@ -61,16 +65,22 @@ export default {
     return db.ref(`data/mascotas/${data.categoria}/${data.id}`)
       .remove()
       .then(() => {
-        dispatch('storeMascotas');
+        if (data.imageUrl) {
+          dispatch('deleteImage', {
+            data
+          });
+        } else {
+          dispatch('storeMascotas');
+        }
       })
       .catch(err => console.error(err))
   },
   uploadImage({
     dispatch
   }, payload) {
-    const task = storage.ref(payload.storageRef).put(payload.data.imagen);
+    const task = storage.ref(`imagenes/mascotas/${payload.data.id}`).put(payload.data.imagen);
     task.on('state_changed',
-      snapshot => {},
+      snapshot => console.log(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)),
       err => console.error(err),
       () => {
         task.snapshot.ref.getDownloadURL()
@@ -89,6 +99,16 @@ export default {
       .update({
         imageUrl: payload.data.imageUrl
       })
+      .then(() => {
+        dispatch('storeMascotas');
+      })
+      .catch(err => console.error(err));
+  },
+  deleteImage({
+    dispatch
+  }, payload) {
+    return storage.ref(`imagenes/mascotas/${payload.data.id}`)
+      .delete()
       .then(() => {
         dispatch('storeMascotas');
       })
