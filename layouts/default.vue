@@ -2,9 +2,7 @@
     <v-app>
         <app-sidenav></app-sidenav>
         <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-5': getBreakpoint.mdAndUp}">
-            <v-layout row wrap>
-                <nuxt />
-            </v-layout>
+            <nuxt />
         </v-container>
         <v-footer>
             <span>&copy; 2019</span>
