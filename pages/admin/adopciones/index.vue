@@ -21,20 +21,13 @@
                     <td>{{ props.item.nombre }}</td>
                     <td>{{ props.item.categoria }}</td>
                     <td>
-                        <v-icon
-                            small
-                            class="mr-2"
-                            @click="openEditDialog('edit',props.item.id, props.item.nombre, props.item.categoria, props.item.imageUrl)"
-                        >edit</v-icon>
-                        <v-icon
-                            small
-                            @click="openDeleteDialog('delete', props.item.id, props.item.categoria, props.item.imageUrl)"
-                        >delete</v-icon>
+                        <v-icon small class="mr-2" @click="openEditDialog('edit',props.item)">edit</v-icon>
+                        <v-icon small @click="openDeleteDialog('delete', props.item)">delete</v-icon>
                     </td>
                 </template>
             </v-data-table>
         </v-card>
-        <v-dialog v-model="dialog" max-width="500px" transition="dialog-transition">
+        <v-dialog v-model="dialog" max-width="800px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
                     <div>
@@ -102,14 +95,14 @@ export default {
         closeDialog() {
             this.dialog = false;
         },
-        openEditDialog(tipo, id, nombre, categoria, imageUrl) {
+        openEditDialog(tipo, data) {
             this.dialog = true;
-            this.deleteData = categoria;
-            this.datosAdopcion = { tipo, id, nombre, categoria, imageUrl };
+            this.deleteData = data.categoria;
+            this.datosAdopcion = { tipo, data };
         },
-        openDeleteDialog(tipo, id, categoria, imageUrl) {
+        openDeleteDialog(tipo, data) {
             this.dialog = true;
-            this.datosAdopcion = { tipo, id, categoria, imageUrl };
+            this.datosAdopcion = { tipo, data };
         },
         openAddDialog(tipo) {
             this.dialog = true;

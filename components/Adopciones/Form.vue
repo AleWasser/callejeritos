@@ -7,6 +7,12 @@
                     <v-text-field label="Nombre" v-model="datos.nombre"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
+                    <tiptap-vuetify v-model="datos.descripcion" :extensions="extensions" />
+                </v-flex>
+                <v-flex xs12 d-flex>
+                    <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
+                </v-flex>
+                <v-flex xs12>
                     <v-img :src="datos.imageUrl" v-if="datos.imageUrl"></v-img>
                 </v-flex>
                 <v-flex xs12>
@@ -18,9 +24,6 @@
                         @change="onFilePicked"
                     />
                     <v-btn raised color="info" @click="onPickFile">Seleccionar una imagen</v-btn>
-                </v-flex>
-                <v-flex xs12 d-flex>
-                    <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -40,6 +43,23 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import {
+    TiptapVuetify,
+    Heading,
+    Bold,
+    Italic,
+    Strike,
+    Underline,
+    Paragraph,
+    BulletList,
+    OrderedList,
+    ListItem,
+    Link,
+    Blockquote,
+    HardBreak,
+    HorizontalRule,
+    History
+} from "tiptap-vuetify";
 
 export default {
     props: {
@@ -57,10 +77,29 @@ export default {
             required: false
         }
     },
+    components: { TiptapVuetify },
     data() {
         return {
             imageUrl: "",
-            image: null
+            image: null,
+            extensions: [
+                new Heading({
+                    levels: [1, 2]
+                }),
+                new Bold(),
+                new Italic(),
+                new Strike(),
+                new Underline(),
+                new Paragraph(),
+                new BulletList(),
+                new OrderedList(),
+                new ListItem(),
+                new Link(),
+                new Blockquote(),
+                new HardBreak(),
+                new HorizontalRule(),
+                new History()
+            ]
         };
     },
     methods: {
@@ -105,6 +144,9 @@ export default {
             getCategorias: "adopciones/getCategorias"
         }),
         datos() {
+            if (process.client) {
+                return this.datosAdopcion.data || {};
+            }
             return this.datosAdopcion;
         }
     }
