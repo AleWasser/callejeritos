@@ -12,10 +12,7 @@
                             <v-progress-circular indeterminate color="primary" :size="100"></v-progress-circular>
                         </v-card-text>
                         <v-card-title primary-title>
-                            <div>
-                                <h3 class="headline mb-0">{{item.nombre}}</h3>
-                                <div>description</div>
-                            </div>
+                            <h3 class="headline mb-0">{{item.nombre}}</h3>
                         </v-card-title>
                         <v-card-actions>
                             <v-btn

@@ -7,13 +7,17 @@
                     <v-text-field label="Nombre" v-model="datos.nombre"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
+                    <label>Descripcion</label>
                     <tiptap-vuetify v-model="datos.descripcion" :extensions="extensions" />
                 </v-flex>
                 <v-flex xs12 d-flex>
                     <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
                 </v-flex>
                 <v-flex xs12>
-                    <v-img :src="datos.imageUrl" v-if="datos.imageUrl"></v-img>
+                    <v-img
+                        :src="previewImage ? previewImage : datos.imageUrl "
+                        v-if="datos.imageUrl"
+                    ></v-img>
                 </v-flex>
                 <v-flex xs12>
                     <input
@@ -34,6 +38,25 @@
                 </v-flex>
             </v-layout>
         </v-container>
+        <v-divider></v-divider>
+        <v-container grid-list-xs>
+            <h6 class="title">Datos de contacto</h6>
+            <v-layout row wrap>
+                <v-flex xs6>
+                    <v-text-field name="Nombre" label="Nombre"></v-text-field>
+                </v-flex>
+                <v-flex xs6>
+                    <v-text-field name="Apellido" label="Apellido"></v-text-field>
+                </v-flex>
+                <v-flex xs6>
+                    <v-text-field name="Domicilio" label="Domicilio"></v-text-field>
+                </v-flex>
+                <v-flex xs6>
+                    <v-text-field name="Telefono" label="Telefono"></v-text-field>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
         <v-card-actions class="justify-center">
             <v-btn color="success" type="submit" @click="close" v-if="datos.tipo != 'delete'">Enviar</v-btn>
             <v-btn color="error" type="submit" @click="close" v-else>Eliminar</v-btn>
@@ -80,7 +103,7 @@ export default {
     components: { TiptapVuetify },
     data() {
         return {
-            imageUrl: "",
+            previewImage: "",
             image: null,
             extensions: [
                 new Heading({
@@ -110,8 +133,10 @@ export default {
         }),
         onSubmit() {
             if (this.datos.tipo == "create") {
+                delete this.datos.tipo;
                 this.createMascota({ ...this.datos, imagen: this.image });
             } else if (this.datos.tipo == "edit") {
+                delete this.datos.tipo;
                 let datos = {
                     ...this.datos,
                     imagen: this.image,
@@ -119,6 +144,7 @@ export default {
                 };
                 this.editMascota(datos);
             } else {
+                delete this.datos.tipo;
                 this.deleteMascota(this.datos);
             }
         },
@@ -133,7 +159,7 @@ export default {
             }
             const fileReader = new FileReader();
             fileReader.addEventListener("load", () => {
-                this.datos.imageUrl = fileReader.result;
+                this.previewImage = fileReader.result;
             });
             fileReader.readAsDataURL(files[0]);
             this.image = files[0];
@@ -144,10 +170,10 @@ export default {
             getCategorias: "adopciones/getCategorias"
         }),
         datos() {
-            if (process.client) {
-                return this.datosAdopcion.data || {};
-            }
-            return this.datosAdopcion;
+            return {
+                ...this.datosAdopcion.data,
+                tipo: this.datosAdopcion.tipo
+            };
         }
     }
 };

@@ -45,6 +45,7 @@ export default {
               id: data.id,
               categoria: data.categoria,
               nombre: data.nombre,
+              descripcion: data.descripcion,
               imageUrl: data.imageUrl || null
             })
             .then(() => {
