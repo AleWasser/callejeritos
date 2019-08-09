@@ -20,6 +20,7 @@
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.nombre }}</td>
                     <td>{{ props.item.categoria }}</td>
+                    <td>{{ props.item.contacto.nombre }}</td>
                     <td>
                         <v-icon small class="mr-2" @click="openEditDialog('edit',props.item)">edit</v-icon>
                         <v-icon small @click="openDeleteDialog('delete', props.item)">delete</v-icon>
@@ -77,6 +78,10 @@ export default {
                     value: "categoria"
                 },
                 {
+                    text: "contacto",
+                    value: "Contacto"
+                },
+                {
                     text: "Acciones",
                     sortable: false
                 }
@@ -98,7 +103,8 @@ export default {
         openEditDialog(tipo, data) {
             this.dialog = true;
             this.deleteData = data.categoria;
-            this.datosAdopcion = { tipo, data };
+            this.datosAdopcion = { tipo, data, contacto: data.contacto };
+            console.log(this.datosAdopcion);
         },
         openDeleteDialog(tipo, data) {
             this.dialog = true;

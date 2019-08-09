@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit">
+        <pre>{{contacto}}</pre>
         <input type="hidden" name="id" v-model="datos.id" />
         <v-container grid-list-xs v-if="datos.tipo != 'delete'">
             <v-layout row wrap>
@@ -43,16 +44,16 @@
             <h6 class="title">Datos de contacto</h6>
             <v-layout row wrap>
                 <v-flex xs6>
-                    <v-text-field name="Nombre" label="Nombre"></v-text-field>
+                    <v-text-field v-model="contacto.nombre" name="Nombre" label="Nombre"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
-                    <v-text-field name="Apellido" label="Apellido"></v-text-field>
+                    <v-text-field v-model="contacto.apellido" name="Apellido" label="Apellido"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
-                    <v-text-field name="Domicilio" label="Domicilio"></v-text-field>
+                    <v-text-field v-model="contacto.domicilio" name="Domicilio" label="Domicilio"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
-                    <v-text-field name="Telefono" label="Telefono"></v-text-field>
+                    <v-text-field v-model="contacto.telefono" name="Telefono" label="Telefono"></v-text-field>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -73,7 +74,6 @@ import {
     Italic,
     Strike,
     Underline,
-    Paragraph,
     BulletList,
     OrderedList,
     ListItem,
@@ -113,7 +113,6 @@ export default {
                 new Italic(),
                 new Strike(),
                 new Underline(),
-                new Paragraph(),
                 new BulletList(),
                 new OrderedList(),
                 new ListItem(),
@@ -134,11 +133,16 @@ export default {
         onSubmit() {
             if (this.datos.tipo == "create") {
                 delete this.datos.tipo;
-                this.createMascota({ ...this.datos, imagen: this.image });
+                this.createMascota({
+                    ...this.datos,
+                    ...this.contacto,
+                    imagen: this.image
+                });
             } else if (this.datos.tipo == "edit") {
                 delete this.datos.tipo;
                 let datos = {
                     ...this.datos,
+                    contacto: this.contacto,
                     imagen: this.image,
                     deleteData: this.categoria
                 };
@@ -174,6 +178,14 @@ export default {
                 ...this.datosAdopcion.data,
                 tipo: this.datosAdopcion.tipo
             };
+        },
+        contacto() {
+            if (this.datosAdopcion.data) {
+                return {
+                    ...this.datosAdopcion.data.contacto
+                };
+            }
+            return {};
         }
     }
 };
