@@ -104,7 +104,6 @@ export default {
             this.dialog = true;
             this.deleteData = data.categoria;
             this.datosAdopcion = { tipo, data, contacto: data.contacto };
-            console.log(this.datosAdopcion);
         },
         openDeleteDialog(tipo, data) {
             this.dialog = true;

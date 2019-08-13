@@ -1,6 +1,5 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <pre>{{contacto}}</pre>
         <input type="hidden" name="id" v-model="datos.id" />
         <v-container grid-list-xs v-if="datos.tipo != 'delete'">
             <v-layout row wrap>
@@ -59,8 +58,13 @@
         </v-container>
 
         <v-card-actions class="justify-center">
-            <v-btn color="success" type="submit" @click="close" v-if="datos.tipo != 'delete'">Enviar</v-btn>
-            <v-btn color="error" type="submit" @click="close" v-else>Eliminar</v-btn>
+            <v-btn
+                color="success"
+                type="submit"
+                @click="closeHandler"
+                v-if="datos.tipo != 'delete'"
+            >Enviar</v-btn>
+            <v-btn color="error" type="submit" @click="closeHandler" v-else>Eliminar</v-btn>
         </v-card-actions>
     </form>
 </template>
@@ -135,7 +139,7 @@ export default {
                 delete this.datos.tipo;
                 this.createMascota({
                     ...this.datos,
-                    ...this.contacto,
+                    contacto: this.contacto,
                     imagen: this.image
                 });
             } else if (this.datos.tipo == "edit") {
@@ -151,6 +155,11 @@ export default {
                 delete this.datos.tipo;
                 this.deleteMascota(this.datos);
             }
+            this.resetDatos;
+        },
+        closeHandler() {
+            this.close();
+            this.resetDatos();
         },
         onPickFile() {
             this.$refs.fileInput.click();
@@ -167,6 +176,9 @@ export default {
             });
             fileReader.readAsDataURL(files[0]);
             this.image = files[0];
+        },
+        resetDatos() {
+            this.datos = {};
         }
     },
     computed: {

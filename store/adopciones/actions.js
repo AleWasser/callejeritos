@@ -7,6 +7,7 @@ export default {
   createMascota({
     dispatch
   }, data) {
+    console.log('[Create Mascota]', data);
     return db.ref(`data/mascotas/${data.categoria}`)
       .push(data)
       .then(res => {
@@ -40,14 +41,9 @@ export default {
           console.error(error);
           return error;
         } else {
+          delete data.deleteData;
           db.ref(`data/mascotas/${data.categoria}/${data.id}`)
-            .update({
-              id: data.id,
-              categoria: data.categoria,
-              nombre: data.nombre,
-              descripcion: data.descripcion,
-              imageUrl: data.imageUrl || null
-            })
+            .update(data)
             .then(() => {
               if (data.imagen) {
                 dispatch('uploadImage', {
