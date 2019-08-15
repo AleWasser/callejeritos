@@ -178,7 +178,7 @@ export default {
             this.image = files[0];
         },
         resetDatos() {
-            this.datos = {};
+            delete this.datos;
         }
     },
     computed: {

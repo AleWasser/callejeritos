@@ -8,7 +8,7 @@
             <div v-html="mascota.descripcion"></div>
         </v-card-text>
         <v-card-actions>
-            <v-btn color="red darken-1" dark block large>
+            <v-btn color="red darken-1" dark block large @click="sheet = true">
                 <v-icon class="mr-2">favorite</v-icon>Adoptar
             </v-btn>
         </v-card-actions>
