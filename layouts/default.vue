@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <app-sidenav></app-sidenav>
-        <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-5': getBreakpoint.mdAndUp}">
+        <v-container fluid :class="{'mt-3':getBreakpoint.smAndDown, 'mt-4': getBreakpoint.mdAndUp}">
             <nuxt />
         </v-container>
         <v-footer>

@@ -6,7 +6,7 @@
         <v-btn flat icon @click="sheet = true">
             <v-icon>share</v-icon>
         </v-btn>
-        <v-flex xs10>
+        <v-flex xs12 md10>
             <app-single-item :mascota="mascota"></app-single-item>
             <app-share-dialog :sheet="sheet" :closeSheet="closeSheet"></app-share-dialog>
         </v-flex>
