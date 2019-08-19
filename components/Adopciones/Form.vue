@@ -14,10 +14,7 @@
                     <v-select :items="getCategorias" v-model="datos.categoria" label="Categoria"></v-select>
                 </v-flex>
                 <v-flex xs12>
-                    <v-img
-                        :src="previewImage ? previewImage : datos.imageUrl "
-                        v-if="datos.imageUrl"
-                    ></v-img>
+                    <v-img :src="datos.imageUrl" v-if="datos.imageUrl"></v-img>
                 </v-flex>
                 <v-flex xs12>
                     <input
@@ -107,7 +104,8 @@ export default {
     components: { TiptapVuetify },
     data() {
         return {
-            previewImage: "",
+            // previewImage: "",
+            previewTitle: "",
             image: null,
             extensions: [
                 new Heading({
@@ -166,19 +164,20 @@ export default {
         },
         onFilePicked(event) {
             const files = event.target.files;
-            let filename = files[0].name;
-            if (filename.lastIndexOf(".") <= 0) {
-                return alert("Por favor, ingresa un archivo valido.");
-            }
-            const fileReader = new FileReader();
-            fileReader.addEventListener("load", () => {
-                this.previewImage = fileReader.result;
-            });
-            fileReader.readAsDataURL(files[0]);
+            // let filename = files[0].name;
+            // if (filename.lastIndexOf(".") <= 0) {
+            //     return alert("Por favor, ingresa un archivo valido.");
+            // }
+            // const fileReader = new FileReader();
+            // fileReader.addEventListener("load", () => {
+            //     this.previewImage = fileReader.result;
+            // });
+            // fileReader.readAsDataURL(files[0]);
             this.image = files[0];
         },
         resetDatos() {
             delete this.datos;
+            this.imageUrl = "";
         }
     },
     computed: {
