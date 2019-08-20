@@ -29,6 +29,11 @@ export default {
                     icon: "table_chart",
                     title: "Adopciones",
                     link: "/admin/adopciones"
+                },
+                {
+                    icon: "chrome_reader_mode",
+                    title: "Blog",
+                    link: "/admin/blog"
                 }
             ]
         };
