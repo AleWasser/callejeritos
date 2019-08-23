@@ -10,7 +10,7 @@
                         v-if="hover"
                         class="text-xs-center transition-fast-in-fast-out v-card--reveal grey darken-4 display-3"
                     >
-                        <v-btn fab icon color="info">
+                        <v-btn fab icon color="info" :to="'/blog/' + post.id">
                             <v-icon>visibility</v-icon>
                         </v-btn>
                         <v-btn fab icon color="primary">
@@ -30,6 +30,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+    props: ["post"],
     computed: mapGetters({
         getBreakpoint: "getBreakpoint"
     })

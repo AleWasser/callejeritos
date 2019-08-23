@@ -7,7 +7,7 @@
             :class="{'px-0': getBreakpoint.smAndDown, 'px-5': getBreakpoint.mdAndUp}"
             align-start
             elevation-24
-            :style="{'margin-top: -205px;': getBreakpoint.smAndDown}"
+            :style="getBreakpoint.mdAndUp ? 'margin-top: -205px;' : 'margin-top: 0px;'"
         >
             <v-flex xs12>
                 <v-card class="px-5 mx-auto">

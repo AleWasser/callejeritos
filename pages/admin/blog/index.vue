@@ -3,9 +3,10 @@
         <v-card>
             <pre>{{getPosts}}</pre>
             <v-container fluid grid-list-md :class="{'pa-0': getBreakpoint.smAndDown}">
+                <v-btn block color="success" dark to="/admin/blog/create">Crear nuevo post</v-btn>
                 <v-layout row wrap>
                     <v-flex class="xs12 md3 pointer" v-for="item in getPosts" :key="item.id">
-                        <app-blog-list></app-blog-list>
+                        <app-blog-list :post="item"></app-blog-list>
                     </v-flex>
                 </v-layout>
             </v-container>
