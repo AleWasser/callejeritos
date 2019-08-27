@@ -1,10 +1,7 @@
 <template>
     <v-hover>
         <v-card slot-scope="{ hover }">
-            <v-img
-                src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2016%2F01%2F256905-animals-dog-puppies.jpg&f=1"
-                aspect-ratio="1"
-            >
+            <v-img :src="post.imageUrl" aspect-ratio="1">
                 <v-expand-transition v-if="getBreakpoint.mdAndUp">
                     <div
                         v-if="hover"

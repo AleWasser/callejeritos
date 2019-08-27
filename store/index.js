@@ -16,10 +16,12 @@ export const actions = {
   async nuxtServerInit({
     commit
   }, context) {
-    return db.ref('data/mascotas')
+    return db.ref('data')
       .once('value')
       .then(res => {
-        commit('adopciones/setAdopciones', res.val());
+        let data = res.val();
+        commit('adopciones/setAdopciones', data.mascotas);
+        commit('blog/setPosts', data.blog);
       })
       .catch(err => console.log(err));
   }
