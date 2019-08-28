@@ -3,28 +3,29 @@
         <v-flex xs12>
             <v-card>
                 <v-img
-                    src="http://thewallpaper.co/wp-content/uploads/2016/02/pure-black-german-shepherd-dog-wide-hd-wallpapers-for-background-cute-doggy-widescreen-1920x1080.jpg"
+                    :src="post.imageUrl"
                     :aspect-ratio="getBreakpoint.smAndDown ? 1.5 : 2.5"
+                    @load="loaded = true"
+                    v-show="loaded"
                 ></v-img>
+                <v-card-text class="text-xs-center" v-if="!loaded">
+                    <v-progress-circular indeterminate color="primary" :size="100"></v-progress-circular>
+                </v-card-text>
                 <v-card-title primary-title class="pb-0">
                     <div>
                         <h2
                             class="mb-1"
                             :class="{'display-1': getBreakpoint.smAndDown, 'display-3 ': getBreakpoint.mdAndUp}"
-                        >Titulo de prueba</h2>
-                        <p class="subheading pl-3">description corta</p>
+                        >{{post.titulo}}</h2>
+                        <p class="subheading pl-3">{{post.descripcion}}</p>
                     </div>
                 </v-card-title>
-                <v-card-text class="px-4 pt-0">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem itaque similique aperiam dolorum porro quis fugit autem. Quisquam, deleniti dolorum? Voluptatum ullam corrupti facere repellendus laborum obcaecati, porro est aut?
-                        Atque reprehenderit provident quis eligendi excepturi officia illum ipsa! Reiciendis mollitia deserunt optio quibusdam, blanditiis sapiente libero doloremque veniam suscipit modi in quasi voluptates. Atque eligendi vel officiis aperiam qui.
-                        Accusamus saepe dignissimos, excepturi unde tempore magnam et eos deserunt incidunt facilis enim dolore. Deleniti, voluptatem animi error repudiandae quam tempore dolores sint nulla minima, voluptas rerum quia magnam eligendi.
-                        Iusto dicta maxime deleniti molestias sequi quod quas praesentium quidem esse enim ipsa, aperiam voluptatum officia non. Aperiam eaque quis mollitia officiis optio, veniam doloremque nisi corporis deserunt consequatur necessitatibus.
-                    </p>
-                </v-card-text>
+                <v-card-text class="px-4 pt-0" v-html="post.contenido"></v-card-text>
                 <v-card-actions>
-                    <v-btn flat color="primary">Volver</v-btn>
+                    <v-btn flat color="primary" to="/blog">Volver</v-btn>
+                    <v-btn flat icon @click="sheet = true">
+                        <v-icon>share</v-icon>
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -62,16 +63,41 @@
                     <p>//Formulario para nuevo comentario</p>
                 </v-card-actions>
             </v-card>
+            <app-share-dialog :sheet="sheet" :closeSheet="closeSheet"></app-share-dialog>
         </v-flex>
     </v-layout>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
+import ShareDialog from "~/components/adopciones/ShareDialog.vue";
+
 export default {
-    computed: {
-        getBreakpoint() {
-            return this.$store.getters.getBreakpoint;
+    components: {
+        "app-share-dialog": ShareDialog
+    },
+    data() {
+        return {
+            post: {},
+            loaded: false,
+            sheet: false
+        };
+    },
+    computed: mapGetters({
+        getBreakpoint: "getBreakpoint",
+        getPostById: "blog/getPostById"
+    }),
+    methods: {
+        getPost(id) {
+            this.post = this.getPostById(id);
+        },
+        closeSheet() {
+            this.sheet = false;
         }
+    },
+    mounted() {
+        this.getPost(this.$route.params.id);
     }
 };
 </script>
