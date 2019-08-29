@@ -1,13 +1,14 @@
 <template>
     <form @submit.prevent="onSubmit">
+        <pre>{{post}}</pre>
         <v-container grid-list-xs>
             <v-layout row wrap>
                 <v-flex xs6>
-                    <v-text-field v-model="titulo" name="titulo" label="Titulo" id="titulo"></v-text-field>
+                    <v-text-field v-model="post.titulo" name="titulo" label="Titulo" id="titulo"></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                     <v-text-field
-                        v-model="descripcion"
+                        v-model="post.descripcion"
                         name="descripcion"
                         label="Descripcion"
                         id="descripcion"
@@ -24,9 +25,8 @@
                     <v-btn raised color="info" @click="onPickFile">Seleccionar una imagen</v-btn>
                 </v-flex>
                 <v-flex xs12>
-                    <tiptap-vuetify v-model="contenido" :extensions="extensions" />
+                    <tiptap-vuetify v-model="post.contenido" :extensions="extensions" />
                 </v-flex>
-                <v-flex xs12 v-html="contenido"></v-flex>
                 <v-flex xs12 class="text-xs-center">
                     <v-btn color="success" type="submit">Crear</v-btn>
                 </v-flex>
@@ -54,13 +54,28 @@ import {
 } from "tiptap-vuetify";
 
 export default {
+    props: {
+        post: {
+            type: Object,
+            required: false,
+            default() {
+                return {
+                    imagen: "",
+                    titulo: "",
+                    descripcion: "",
+                    contenido: ""
+                };
+            }
+        },
+        edit: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
     components: { TiptapVuetify },
     data() {
         return {
-            imagen: "",
-            titulo: "",
-            descripcion: "",
-            contenido: "",
             extensions: [
                 new Heading({
                     levels: [1, 2]
@@ -91,12 +106,16 @@ export default {
             this.imagen = files[0];
         },
         onSubmit() {
-            this.createPost({
-                titulo: this.titulo,
-                descripcion: this.descripcion,
-                imagen: this.imagen,
-                contenido: this.contenido
-            });
+            if (this.edit) {
+                console.log("edit");
+            } else {
+                this.createPost({
+                    titulo: this.post.titulo,
+                    descripcion: this.post.descripcion,
+                    imagen: this.post.imagen,
+                    contenido: this.post.contenido
+                });
+            }
         }
     }
 };

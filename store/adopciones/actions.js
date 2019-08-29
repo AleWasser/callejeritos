@@ -2,12 +2,14 @@ import {
   db,
   storage
 } from '~/plugins/firebase.js';
+import moment from '~/plugins/moment.js';
 
 export default {
   createMascota({
     dispatch
   }, data) {
     console.log('[Create Mascota]', data);
+    data.fecha = moment().format('L');
     return db.ref(`data/mascotas/${data.categoria}`)
       .push(data)
       .then(res => {

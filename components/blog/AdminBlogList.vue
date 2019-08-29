@@ -10,7 +10,7 @@
                         <v-btn fab icon color="info" :to="'/blog/' + post.id">
                             <v-icon>visibility</v-icon>
                         </v-btn>
-                        <v-btn fab icon color="primary">
+                        <v-btn fab icon color="primary" :to="'/admin/blog/edit/' + post.id">
                             <v-icon>edit</v-icon>
                         </v-btn>
                         <v-btn fab icon color="error">

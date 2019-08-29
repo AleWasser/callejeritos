@@ -19,8 +19,14 @@
                                 </v-carousel-item>
                             </v-carousel>
                         </v-flex>
-                        <v-flex xs12 md6 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
-                            <app-blog-list></app-blog-list>
+                        <v-flex
+                            xs12
+                            md6
+                            :class="{'my-1 pa-0': getBreakpoint.smAndDown}"
+                            v-for="post in getPosts"
+                            :key="post.id"
+                        >
+                            <app-blog-list :post="post"></app-blog-list>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -30,8 +36,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import BlogList from "~/components/blog/BlogList.vue";
-//TODO Efectos: Al hacer mouseover opacar la imagen y agrandar el titulo
+
 export default {
     components: {
         "app-blog-list": BlogList
@@ -41,10 +49,9 @@ export default {
             colors: ["primary", "secondary", "yellow darken-2", "red", "orange"]
         };
     },
-    computed: {
-        getBreakpoint() {
-            return this.$store.getters.getBreakpoint;
-        }
-    }
+    computed: mapGetters({
+        getBreakpoint: "getBreakpoint",
+        getPosts: "blog/getPosts"
+    })
 };
 </script>

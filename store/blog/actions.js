@@ -2,12 +2,14 @@ import {
     db,
     storage
 } from '~/plugins/firebase.js';
+import moment from '~/plugins/moment.js';
 
 export default {
     createPost({
         dispatch
     }, data) {
         console.log('[Create post]', data);
+        data.fecha = moment().format('L');
         return db.ref(`data/blog`)
             .push(data)
             .then(res => {
