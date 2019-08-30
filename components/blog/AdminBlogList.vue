@@ -13,7 +13,7 @@
                         <v-btn fab icon color="primary" :to="'/admin/blog/edit/' + post.id">
                             <v-icon>edit</v-icon>
                         </v-btn>
-                        <v-btn fab icon color="error">
+                        <v-btn fab icon color="error" @click="openModal(post)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </div>
@@ -24,13 +24,18 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-    props: ["post"],
+    props: ["post", "openDelete"],
     computed: mapGetters({
         getBreakpoint: "getBreakpoint"
-    })
+    }),
+    methods: {
+        openModal(post) {
+            this.openDelete(post);
+        }
+    }
 };
 </script>
 

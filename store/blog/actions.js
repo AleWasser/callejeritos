@@ -24,6 +24,48 @@ export default {
             })
             .catch(err => console.log(err));
     },
+    editPost({
+        dispatch
+    }, data) {
+        console.log('[Edit Post]', data);
+        return db.ref(`data/blog/${data.id}`)
+            .remove((error) => {
+                if (error) {
+                    console.error('[Edit Post]', error);
+                    return error;
+                } else {
+                    delete data.deleteData;
+                    db.ref(`data/blog/${data.id}`)
+                        .update(data)
+                        .then(() => {
+                            if (data.imagen) {
+                                dispatch('uploadImage', {
+                                    data
+                                });
+                            }
+                            dispatch('storePosts');
+                        })
+                        .catch(err => console.error(err));
+                }
+            });
+    },
+    deletePost({
+        dispatch
+    }, data) {
+        console.log('[Delete post]', data);
+        return db.ref(`data/blog/${data.id}`)
+            .remove()
+            .then(() => {
+                if (data.imageUrl) {
+                    dispatch('deleteImage', {
+                        data
+                    });
+                } else {
+                    dispatch('storePosts');
+                }
+            })
+            .catch(err => console.error(err));
+    },
     storePosts({
         commit
     }) {
@@ -37,7 +79,7 @@ export default {
     uploadImage({
         dispatch
     }, payload) {
-        const task = storage.ref(`imagenes/blog/${payload.data.id}/${payload.data.titulo}`).put(payload.data.imagen);
+        const task = storage.ref(`imagenes/blog/${payload.data.id}/${payload.data.id}`).put(payload.data.imagen);
         task.on('state_changed',
             snapshot => console.log(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)),
             err => console.error(err),
@@ -63,4 +105,14 @@ export default {
             })
             .catch(err => console.error(err));
     },
+    deleteImage({
+        dispatch
+    }, payload) {
+        return storage.ref(`imagenes/blog/${payload.data.id}/${payload.data.id}`)
+            .delete()
+            .then(() => {
+                dispatch('storePosts');
+            })
+            .catch(err => console.error(err));
+    }
 }
