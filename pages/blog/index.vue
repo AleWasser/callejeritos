@@ -10,12 +10,21 @@
                     <v-layout row wrap>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <v-carousel>
-                                <v-carousel-item v-for="(color, i) in colors" :key="color">
-                                    <v-sheet :color="color" height="100%" tile>
-                                        <v-layout align-center justify-center row fill-height>
-                                            <div class="display-3">Slide {{ i + 1 }}</div>
-                                        </v-layout>
-                                    </v-sheet>
+                                <v-carousel-item v-for="post in getSliderPosts" :key="post">
+                                    <nuxt-link tag="div" :to="'/blog/' + post.id" class="pointer">
+                                        <v-img :src="post.imageUrl">
+                                            <v-sheet color="transparent" height="100%" tile>
+                                                <v-layout
+                                                    align-start
+                                                    justify-center
+                                                    row
+                                                    fill-height
+                                                >
+                                                    <div class="display-3">{{post.titulo}}</div>
+                                                </v-layout>
+                                            </v-sheet>
+                                        </v-img>
+                                    </nuxt-link>
                                 </v-carousel-item>
                             </v-carousel>
                         </v-flex>
@@ -51,7 +60,14 @@ export default {
     },
     computed: mapGetters({
         getBreakpoint: "getBreakpoint",
-        getPosts: "blog/getPosts"
+        getPosts: "blog/getPosts",
+        getSliderPosts: "blog/getSliderPosts"
     })
 };
 </script>
+
+<style scoped>
+.pointer {
+    cursor: pointer;
+}
+</style>
