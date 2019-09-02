@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export default {
   getPosts(state) {
     return state.posts;

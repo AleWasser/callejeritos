@@ -8,7 +8,7 @@
         </v-toolbar-items>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            <v-btn flat>Logout</v-btn>
+            <v-btn flat @click="onClick">Logout</v-btn>
         </v-toolbar-items>
     </v-toolbar>
 </template>
@@ -41,6 +41,11 @@ export default {
     computed: {
         getBreakpoint() {
             return this.$store.getters.getBreakpoint;
+        }
+    },
+    methods: {
+        onClick() {
+            this.$store.dispatch("logout");
         }
     }
 };

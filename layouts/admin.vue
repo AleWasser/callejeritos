@@ -13,6 +13,7 @@
 import AdminNav from "~/components/Navigation/AdminNav.vue";
 
 export default {
+    middleware: ["check-auth", "auth"],
     components: {
         "app-nav": AdminNav
     },
