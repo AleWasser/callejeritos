@@ -7,7 +7,8 @@ import {
 
 export const state = () => ({
   breakpoint: '',
-  token: null
+  token: null,
+  notification: null
 });
 
 export const mutations = {
@@ -19,6 +20,9 @@ export const mutations = {
   },
   clearToken(state) {
     state.token = null;
+  },
+  setNotification(state, payload) {
+    state.notification = payload;
   }
 }
 
@@ -55,6 +59,9 @@ export const actions = {
           new Date().getTime() * 1000
         );
         this.$router.push('/admin');
+        commit('setNotification', {
+          text: 'Usuario logueado'
+        });
       })
       .catch(err => console.error(err));
   },
@@ -110,5 +117,8 @@ export const getters = {
   },
   isAuthenticated(state) {
     return state.token != null;
+  },
+  getNotification(state) {
+    return state.notification;
   }
 }

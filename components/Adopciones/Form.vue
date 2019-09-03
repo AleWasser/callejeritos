@@ -27,29 +27,33 @@
                     <v-btn raised color="info" @click="onPickFile">Seleccionar una imagen</v-btn>
                 </v-flex>
             </v-layout>
+            <v-divider></v-divider>
+            <v-container grid-list-xs>
+                <h6 class="title">Datos de contacto</h6>
+                <v-layout row wrap>
+                    <v-flex xs6>
+                        <v-text-field v-model="contacto.nombre" name="Nombre" label="Nombre"></v-text-field>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field v-model="contacto.apellido" name="Apellido" label="Apellido"></v-text-field>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field
+                            v-model="contacto.domicilio"
+                            name="Domicilio"
+                            label="Domicilio"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field v-model="contacto.telefono" name="Telefono" label="Telefono"></v-text-field>
+                    </v-flex>
+                </v-layout>
+            </v-container>
         </v-container>
         <v-container grid-list-xs v-else>
             <v-layout row wrap>
                 <v-flex xs12 class="text-xs-center">
                     <p class="subheading font-weight-medium">¿Esta seguro de eliminar esta mascota?</p>
-                </v-flex>
-            </v-layout>
-        </v-container>
-        <v-divider></v-divider>
-        <v-container grid-list-xs>
-            <h6 class="title">Datos de contacto</h6>
-            <v-layout row wrap>
-                <v-flex xs6>
-                    <v-text-field v-model="contacto.nombre" name="Nombre" label="Nombre"></v-text-field>
-                </v-flex>
-                <v-flex xs6>
-                    <v-text-field v-model="contacto.apellido" name="Apellido" label="Apellido"></v-text-field>
-                </v-flex>
-                <v-flex xs6>
-                    <v-text-field v-model="contacto.domicilio" name="Domicilio" label="Domicilio"></v-text-field>
-                </v-flex>
-                <v-flex xs6>
-                    <v-text-field v-model="contacto.telefono" name="Telefono" label="Telefono"></v-text-field>
                 </v-flex>
             </v-layout>
         </v-container>
