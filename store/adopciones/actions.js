@@ -6,7 +6,8 @@ import moment from '~/plugins/moment.js';
 
 export default {
   createMascota({
-    dispatch
+    dispatch,
+    commit
   }, data) {
     console.log('[Create Mascota]', data);
     data.fecha = moment().format('L');
@@ -21,6 +22,12 @@ export default {
         } else {
           dispatch('storeMascotas');
         }
+        commit('setNotification', {
+          text: 'Adopcion creada',
+          color: 'success'
+        }, {
+          root: true
+        });
       })
       .catch(err => console.log(err));
   },
@@ -35,7 +42,8 @@ export default {
       .catch(err => console.log(err));
   },
   editMascota({
-    dispatch
+    dispatch,
+    commit
   }, data) {
     return db.ref(`data/mascotas/${data.deleteData}/${data.id}`)
       .remove((error) => {
@@ -53,13 +61,20 @@ export default {
                 });
               }
               dispatch('storeMascotas');
+              commit('setNotification', {
+                text: 'Adopcion editada',
+                color: 'success'
+              }, {
+                root: true
+              });
             })
             .catch(err => console.error(err));
         }
       });
   },
   deleteMascota({
-    dispatch
+    dispatch,
+    commit
   }, data) {
     return db.ref(`data/mascotas/${data.categoria}/${data.id}`)
       .remove()
@@ -71,6 +86,12 @@ export default {
         } else {
           dispatch('storeMascotas');
         }
+        commit('setNotification', {
+          text: 'Adopcion eliminada',
+          color: 'error'
+        }, {
+          root: true
+        });
       })
       .catch(err => console.error(err))
   },
