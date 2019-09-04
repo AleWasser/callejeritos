@@ -30,7 +30,7 @@
             </v-card>
         </v-flex>
         <v-flex xs12 mt-3>
-            <v-card>
+            <!-- <v-card>
                 <v-card-title primary-title>
                     <div>
                         <h3 class="display-2 mb-0">Comentarios</h3>
@@ -62,7 +62,7 @@
                 <v-card-actions>
                     <p>//Formulario para nuevo comentario</p>
                 </v-card-actions>
-            </v-card>
+            </v-card> -->
             <app-share-dialog :sheet="sheet" :closeSheet="closeSheet"></app-share-dialog>
         </v-flex>
     </v-layout>

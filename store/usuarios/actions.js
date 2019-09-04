@@ -1,34 +1,38 @@
 import {
     db,
-    storage
+    storage,
+    auth
 } from '~/plugins/firebase.js';
 import moment from '~/plugins/moment.js';
 
 export default {
-    createPost({
+    createUser({
         dispatch,
         commit
     }, data) {
-        console.log('[Create post]', data);
         data.fecha = moment().format('L');
-        return db.ref(`data/blog`)
-            .push(data)
-            .then(res => {
-                if (data.imagen) {
-                    data.id = res.key;
-                    dispatch('uploadImage', {
-                        data: data
-                    });
-                } else {
-                    dispatch('storePosts');
-                }
-                this.$router.push('/admin/blog');
-                commit('setNotification', {
-                    text: 'Post creado',
-                    color: 'success'
-                }, {
-                    root: true
-                });
+        return auth.createUserWithEmailAndPassword(data.email, data.password)
+            .then(user => {
+                data.usuario_id = user.user.uid;
+                db.ref(`data/usuarios`)
+                    .push(data)
+                    .then(res => {
+                        if (data.imagen) {
+                            data.id = res.key;
+                            dispatch('uploadImage', {
+                                data: data
+                            });
+                        } else {
+                            dispatch('storePosts');
+                        }
+                        this.$router.push('/admin/usuarios');
+                        commit('setNotification', {
+                            text: 'Usuario creado',
+                            color: 'success'
+                        }, {
+                            root: true
+                        });
+                    })
             })
             .catch(err => console.log(err));
     },

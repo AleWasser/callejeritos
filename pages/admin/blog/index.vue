@@ -1,7 +1,6 @@
 <template>
     <v-flex xs12>
         <v-card>
-            <pre>{{getPosts}}</pre>
             <v-container fluid grid-list-md :class="{'pa-0': getBreakpoint.smAndDown}">
                 <v-btn block color="success" dark to="/admin/blog/create">Crear nuevo post</v-btn>
                 <v-layout row wrap>

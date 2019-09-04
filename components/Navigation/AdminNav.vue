@@ -34,6 +34,11 @@ export default {
                     icon: "chrome_reader_mode",
                     title: "Blog",
                     link: "/admin/blog"
+                },
+                {
+                    icon: "account_box",
+                    title: "Usuarios",
+                    link: "/admin/usuarios"
                 }
             ]
         };
