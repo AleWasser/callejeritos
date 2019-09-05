@@ -13,11 +13,19 @@
                 <template v-slot:items="props">
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.nombre }}</td>
-                    <td>{{ props.item.categoria }}</td>
-                    <td>{{ props.item.contacto.nombre }}</td>
+                    <td>{{ props.item.email }}</td>
                     <td>
-                        <v-icon small class="mr-2" :to="'/admin/usuarios/edit' + props.item.id">edit</v-icon>
-                        <v-icon small @click="openDelete(props.item)">delete</v-icon>
+                        <v-btn
+                            flat
+                            icon
+                            color="primary"
+                            :to="'/admin/usuarios/edit/' + props.item.id"
+                        >
+                            <v-icon small>edit</v-icon>
+                        </v-btn>
+                        <v-btn flat icon color="error" @click="openDelete(props.item)">
+                            <v-icon small>delete</v-icon>
+                        </v-btn>
                     </td>
                 </template>
             </v-data-table>
@@ -38,6 +46,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     layout: "admin",
     data() {
@@ -65,10 +75,20 @@ export default {
         };
     },
     methods: {
+        ...mapActions({
+            deleteUser: "usuarios/deleteUser"
+        }),
         openDelete(data) {
             this.deleteData = data;
             this.dialog = true;
+        },
+        deleteItem() {
+            this.deleteUser(this.deleteData);
+            this.dialog = false;
         }
-    }
+    },
+    computed: mapGetters({
+        getUsuarios: "usuarios/getUsuarios"
+    })
 };
 </script>

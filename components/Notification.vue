@@ -22,7 +22,6 @@ export default {
         notification() {
             let notificaciones = { ...this.$store.getters.getNotification };
             if (Object.keys(notificaciones).length > 0) {
-                console.log(notificaciones);
                 this.snackbar = true;
                 return notificaciones;
             }

@@ -6,10 +6,10 @@
                 <v-flex xs12>
                     <v-text-field v-model="datos.nombre" name="nombre" label="Nombre" id="nombre"></v-text-field>
                 </v-flex>
-                <v-flex xs12>
+                <v-flex xs12 v-if="!edit">
                     <v-text-field v-model="datos.email" name="email" label="Email" id="email"></v-text-field>
                 </v-flex>
-                <v-flex xs12>
+                <v-flex xs12 v-if="!edit">
                     <v-text-field
                         v-model="datos.password"
                         :append-icon="show ? 'visibility' : 'visibility_off'"

@@ -36,6 +36,7 @@ export const actions = {
         let data = res.val();
         commit('adopciones/setAdopciones', data.mascotas);
         commit('blog/setPosts', data.blog);
+        commit('usuarios/setUsuarios', data.usuarios);
       })
       .catch(err => console.log(err));
   },
@@ -44,6 +45,7 @@ export const actions = {
   }, data) {
     auth.signInWithEmailAndPassword(data.email, data.password)
       .then(data => {
+        console.log(data.user);
         return data.user.getIdToken();
       })
       .then(token => {

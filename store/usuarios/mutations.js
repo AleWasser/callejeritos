@@ -1,10 +1,10 @@
 export default {
-    setPosts(state, data) {
-        state.posts = [];
+    setUsuarios(state, data) {
+        state.usuarios = [];
         for (let key in data) {
             const item = data[key];
             item.id = key;
-            state.posts.push(item);
+            state.usuarios.push(item);
         }
     }
 }
