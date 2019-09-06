@@ -14,7 +14,7 @@ export default {
         return auth.createUserWithEmailAndPassword(data.email, data.password)
             .then(user => {
                 if (user) {
-                    user.updateProfile({
+                    user.user.updateProfile({
                             displayName: data.nombre
                             // photoUrl: data.imagen
                         })
@@ -25,6 +25,7 @@ export default {
                                 .then(res => {
                                     if (data.imagen) {
                                         data.id = res.key;
+                                        delete data.password;
                                         dispatch('uploadImage', {
                                             data: data
                                         });
@@ -49,32 +50,44 @@ export default {
         commit
     }, data) {
         console.log('[Edit usuario]', data);
-        return db.ref(`data/usuarios/${data.id}`)
-            .remove((error) => {
-                if (error) {
-                    console.error('[Edit usuario]', error);
-                    return error;
-                } else {
-                    delete data.deleteData;
-                    db.ref(`data/usuarios/${data.id}`)
-                        .update(data)
-                        .then(() => {
-                            if (data.imagen) {
-                                dispatch('uploadImage', {
-                                    data
-                                });
-                            }
-                            dispatch('storeUsuarios');
-                            this.$router.push('/admin/usuarios');
-                            commit('setNotification', {
-                                text: 'Usuario editado',
-                                color: 'success'
-                            }, {
-                                root: true
-                            });
+        return auth.signInWithEmailAndPassword(data.email, data.password)
+            .then(user => {
+                if (user) {
+                    user.user.updateProfile({
+                            displayName: data.nombre
                         })
-                        .catch(err => console.error(err));
+                        .then(() => {
+                            db.ref(`data/usuarios/${data.id}`)
+                                .remove((error) => {
+                                    if (error) {
+                                        console.error('[Edit usuario]', error);
+                                        return error;
+                                    } else {
+                                        delete data.deleteData;
+                                        delete data.password;
+                                        db.ref(`data/usuarios/${data.id}`)
+                                            .update(data)
+                                            .then(() => {
+                                                if (data.imagen) {
+                                                    dispatch('uploadImage', {
+                                                        data
+                                                    });
+                                                }
+                                                dispatch('storeUsuarios');
+                                                this.$router.push('/admin/usuarios');
+                                                commit('setNotification', {
+                                                    text: 'Usuario editado',
+                                                    color: 'success'
+                                                }, {
+                                                    root: true
+                                                });
+                                            })
+                                            .catch(err => console.error(err));
+                                    }
+                                })
+                        })
                 }
+
             });
     },
     deleteUser({

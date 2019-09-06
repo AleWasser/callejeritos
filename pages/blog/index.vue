@@ -10,7 +10,7 @@
                     <v-layout row wrap>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <v-carousel>
-                                <v-carousel-item v-for="post in getSliderPosts" :key="post">
+                                <v-carousel-item v-for="post in getSliderPosts" :key="post.id">
                                     <nuxt-link tag="div" :to="'/blog/' + post.id" class="pointer">
                                         <v-img :src="post.imageUrl">
                                             <v-sheet color="transparent" height="100%" tile>
