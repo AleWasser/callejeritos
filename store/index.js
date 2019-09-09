@@ -5,6 +5,8 @@ import {
   auth
 } from '~/plugins/firebase.js';
 
+import checkUser from './../helpers/checkUser';
+
 export const state = () => ({
   breakpoint: '',
   token: null,
@@ -41,29 +43,38 @@ export const actions = {
       .catch(err => console.log(err));
   },
   userLogin({
-    commit
+    commit,
+    state
   }, data) {
     auth.signInWithEmailAndPassword(data.email, data.password)
       .then(data => {
-        console.log(data.user);
-        return data.user.getIdToken();
-      })
-      .then(token => {
-        commit('setToken', token);
-        localStorage.setItem('token', token);
-        localStorage.setItem(
-          "tokenExpiration",
-          new Date().getTime() * 1000
-        );
-        Cookie.set("jwt", token);
-        Cookie.set(
-          "expirationDate",
-          new Date().getTime() * 1000
-        );
-        this.$router.push('/admin');
-        commit('setNotification', {
-          text: 'Usuario logueado'
-        });
+        if (checkUser(state.usuarios, data.user.uid)) { //* Si el usuario esta en la base de datos loguearlo
+          return data.user.getIdToken()
+            .then(token => {
+              commit('setToken', token);
+              localStorage.setItem('token', token);
+              localStorage.setItem(
+                "tokenExpiration",
+                new Date().getTime() * 1000
+              );
+              Cookie.set("jwt", token);
+              Cookie.set(
+                "expirationDate",
+                new Date().getTime() * 1000
+              );
+              this.$router.push('/admin');
+              commit('setNotification', {
+                text: 'Usuario logueado'
+              });
+            })
+        } else { //* Si no esta en la base de datos, eliminarlo
+          commit('setNotification', {
+            text: 'Usted no tiene permitido ingresar al sistema',
+            color: 'error'
+          });
+          auth.currentUser.delete()
+            .catch(err => console.error(err));
+        }
       })
       .catch(err => console.error(err));
   },

@@ -19,7 +19,7 @@ export default {
                             // photoUrl: data.imagen
                         })
                         .then(() => {
-                            data.usuario_id = user.user.uid;
+                            data.uid = user.user.uid;
                             db.ref(`data/usuarios`)
                                 .push(data)
                                 .then(res => {
