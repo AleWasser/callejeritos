@@ -10,6 +10,7 @@ import checkUser from './../helpers/checkUser';
 export const state = () => ({
   breakpoint: '',
   token: null,
+  user: {},
   notification: null
 });
 
@@ -25,6 +26,9 @@ export const mutations = {
   },
   setNotification(state, payload) {
     state.notification = payload;
+  },
+  setUserData(state, payload) {
+    state.user = payload;
   }
 }
 
@@ -62,6 +66,8 @@ export const actions = {
                 "expirationDate",
                 new Date().getTime() * 1000
               );
+              Cookie.set('userName', data.user.displayName);
+              Cookie.set('email', data.user.email);
               this.$router.push('/admin');
               commit('setNotification', {
                 text: 'Usuario logueado'
@@ -76,7 +82,13 @@ export const actions = {
             .catch(err => console.error(err));
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        commit('setNotification', {
+          text: 'Usuario o contraseña incorrectos',
+          color: 'warning'
+        });
+      });
   },
   initAuth({
     commit,
@@ -99,6 +111,21 @@ export const actions = {
         .split(";")
         .find(c => c.trim().startsWith("expirationDate="))
         .split("=")[1];
+
+      //* Datos del usuario autenticado
+      let userName = req.headers.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("userName="))
+        .split("=")[1];
+      let email = req.headers.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("email="))
+        .split("=")[1];
+      commit('setUserData', {
+        userName,
+        email
+      });
+
     } else {
       token = localStorage.getItem("token");
       expirationDate = localStorage.getItem("tokenExpiration");
@@ -133,5 +160,8 @@ export const getters = {
   },
   getNotification(state) {
     return state.notification;
+  },
+  getUserData(state) {
+    return state.user;
   }
 }

@@ -39,6 +39,11 @@ export default {
                     icon: "account_box",
                     title: "Usuarios",
                     link: "/admin/usuarios"
+                },
+                {
+                    icon: "accessibility",
+                    title: "Mi perfil",
+                    link: "/admin/usuarios/"
                 }
             ]
         };
@@ -46,6 +51,9 @@ export default {
     computed: {
         getBreakpoint() {
             return this.$store.getters.getBreakpoint;
+        },
+        getUser() {
+            return this.$store.getters.getUserData;
         }
     },
     methods: {

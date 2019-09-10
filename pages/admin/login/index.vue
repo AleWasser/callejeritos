@@ -1,5 +1,6 @@
 <template>
     <v-layout row wrap>
+        <app-notification></app-notification>
         <v-flex xs4 offset-xs4>
             <form @submit.prevent="onSubmit">
                 <v-card>
@@ -30,7 +31,12 @@
 <script>
 import { mapActions } from "vuex";
 
+import Notification from "~/components/Notification.vue";
+
 export default {
+    components: {
+        "app-notification": Notification
+    },
     data() {
         return {
             show: false,
