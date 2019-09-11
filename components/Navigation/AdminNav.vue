@@ -43,7 +43,7 @@ export default {
                 {
                     icon: "accessibility",
                     title: "Mi perfil",
-                    link: "/admin/usuarios/"
+                    link: "/admin/perfil/"
                 }
             ]
         };
