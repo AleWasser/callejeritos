@@ -53,6 +53,10 @@ export const actions = {
     auth.signInWithEmailAndPassword(data.email, data.password)
       .then(data => {
         if (checkUser(state.usuarios, data.user.uid)) { //* Si el usuario esta en la base de datos loguearlo
+          commit('setUserData', {
+            userName: data.user.displayName,
+            email: data.user.email
+          });
           return data.user.getIdToken()
             .then(token => {
               commit('setToken', token);
