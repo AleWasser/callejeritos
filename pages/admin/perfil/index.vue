@@ -13,8 +13,13 @@
                         <p class="subheading font-weight-medium mt-2 mb-1">{{getUser.userName}}</p>
                         <p>{{getUser.email}}</p>
                     </v-card-text>
+                    <app-perfil-edit :nombre="getUser.userName" :email="getUser.email" v-if="edit"></app-perfil-edit>
                     <v-card-actions class="justify-center pt-0">
-                        <v-btn color="primary" type="submit">Editar</v-btn>
+                        <v-btn
+                            color="primary"
+                            type="button"
+                            @click="edit = !edit"
+                        >{{edit ? 'Aceptar' : 'Editar'}}</v-btn>
                     </v-card-actions>
                 </v-card>
             </form>
@@ -23,8 +28,18 @@
 </template>
 
 <script>
+import EditForm from "~/components/Perfil/EditForm.vue";
+
 export default {
     layout: "admin",
+    components: {
+        "app-perfil-edit": EditForm
+    },
+    data() {
+        return {
+            edit: false
+        };
+    },
     computed: {
         getUser() {
             return this.$store.getters.getUserData;
