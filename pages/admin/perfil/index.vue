@@ -13,12 +13,31 @@
                         <p class="subheading font-weight-medium mt-2 mb-1">{{getUser.userName}}</p>
                         <p>{{getUser.email}}</p>
                     </v-card-text>
-                    <app-perfil-edit :nombre="getUser.userName" :email="getUser.email" v-if="edit"></app-perfil-edit>
+                    <v-layout row wrap v-if="edit">
+                        <v-flex xs10 offset-xs1>
+                            <v-text-field
+                                name="nombre"
+                                label="Nombre"
+                                id="nombre"
+                                ref="userName"
+                                v-model="userName"
+                            ></v-text-field>
+                        </v-flex>
+                        <v-flex xs10 offset-xs1>
+                            <v-text-field
+                                name="email"
+                                label="Email"
+                                id="email"
+                                ref="email"
+                                v-model="email"
+                            ></v-text-field>
+                        </v-flex>
+                    </v-layout>
                     <v-card-actions class="justify-center pt-0">
                         <v-btn
                             color="primary"
                             type="button"
-                            @click="edit = !edit"
+                            @click="onClick"
                         >{{edit ? 'Aceptar' : 'Editar'}}</v-btn>
                     </v-card-actions>
                 </v-card>
@@ -28,21 +47,29 @@
 </template>
 
 <script>
-import EditForm from "~/components/Perfil/EditForm.vue";
-
 export default {
     layout: "admin",
-    components: {
-        "app-perfil-edit": EditForm
-    },
     data() {
         return {
-            edit: false
+            edit: false,
+            userName: "",
+            email: ""
         };
     },
     computed: {
         getUser() {
             return this.$store.getters.getUserData;
+        }
+    },
+    methods: {
+        onClick() {
+            this.edit = !this.edit;
+            if (!this.edit) {
+                this.$store.dispatch("editUser", {
+                    userName: this.userName,
+                    email: this.email
+                });
+            }
         }
     }
 };

@@ -94,6 +94,33 @@ export const actions = {
         });
       });
   },
+  editUser({
+    commit
+  }, data) {
+    let user = auth.currentUser;
+    if (user) {
+      user.updateProfile({
+          displayName: data.userName
+          //photoUrl: data.imagen
+        }).then(() => {
+          console.log(user.displayName);
+          return user.updateEmail(data.email);
+        })
+        .then(() => {
+          commit('setNotification', {
+            text: 'Usuario modificado',
+            color: 'success'
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          commit('setNotification', {
+            text: 'Error intente de nuevo',
+            color: 'error'
+          });
+        })
+    }
+  },
   initAuth({
     commit,
     dispatch
