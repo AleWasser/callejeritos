@@ -99,14 +99,21 @@ export const actions = {
   }, data) {
     let user = auth.currentUser;
     if (user) {
+      console.log(user.displayName);
       user.updateProfile({
           displayName: data.userName
           //photoUrl: data.imagen
         }).then(() => {
-          console.log(user.displayName);
+          if (!data.email) {
+            return true;
+          }
           return user.updateEmail(data.email);
         })
         .then(() => {
+          commit('setUserData', {
+            userName: user.displayName,
+            email: user.email
+          });
           commit('setNotification', {
             text: 'Usuario modificado',
             color: 'success'
