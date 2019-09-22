@@ -23,15 +23,6 @@
                                 v-model="userName"
                             ></v-text-field>
                         </v-flex>
-                        <v-flex xs10 offset-xs1>
-                            <v-text-field
-                                name="email"
-                                label="Email"
-                                id="email"
-                                ref="email"
-                                v-model="email"
-                            ></v-text-field>
-                        </v-flex>
                     </v-layout>
                     <v-card-actions class="justify-center pt-0">
                         <v-btn

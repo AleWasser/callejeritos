@@ -62,7 +62,12 @@ export default {
             items: [
                 { icon: "home", title: "Home", link: "/" },
                 { icon: "feedback", title: "Blog", link: "/blog" },
-                { icon: "favorite", title: "Adopciones", link: "/adopciones" }
+                { icon: "favorite", title: "Adopciones", link: "/adopciones" },
+                {
+                    icon: "credit_card",
+                    title: "Donaciones",
+                    link: "/donaciones"
+                }
             ]
         };
     },

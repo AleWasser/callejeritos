@@ -16,8 +16,8 @@
 <script>
 import { mapGetters } from "vuex";
 
-import SingleItem from "~/components/adopciones/SingleItem.vue";
-import ShareDialog from "~/components/adopciones/ShareDialog.vue";
+import SingleItem from "~/components/Adopciones/SingleItem.vue";
+import ShareDialog from "~/components/Adopciones/ShareDialog.vue";
 
 export default {
     components: {

@@ -103,11 +103,6 @@ export const actions = {
       user.updateProfile({
           displayName: data.userName
           //photoUrl: data.imagen
-        }).then(() => {
-          if (!data.email) {
-            return true;
-          }
-          return user.updateEmail(data.email);
         })
         .then(() => {
           commit('setUserData', {

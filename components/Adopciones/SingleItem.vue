@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ContactDialog from "~/components/adopciones/ContactDialog.vue";
+import ContactDialog from "~/components/Adopciones/ContactDialog.vue";
 
 export default {
     props: ["mascota"],

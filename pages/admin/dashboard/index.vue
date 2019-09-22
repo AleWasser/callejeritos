@@ -3,7 +3,7 @@
         <v-flex xs12>
             <v-card>
                 <v-card-title primary-title>
-                    <h1>Administrador</h1>
+                    <h3 class="display-1">Dashboard</h3>
                 </v-card-title>
                 <v-container grid-list-md>
                     <v-layout row wrap class="justify-center">
