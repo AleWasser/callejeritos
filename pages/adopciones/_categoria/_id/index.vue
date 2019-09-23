@@ -8,7 +8,7 @@
         </v-btn>
         <v-flex xs12 md10>
             <app-single-item :mascota="mascota"></app-single-item>
-            <app-share-dialog :sheet="sheet" :closeSheet="closeSheet"></app-share-dialog>
+            <app-share-dialog :sheet="sheet" :url="url" :closeSheet="closeSheet"></app-share-dialog>
         </v-flex>
     </v-layout>
 </template>
@@ -29,6 +29,9 @@ export default {
             categoria: "",
             sheet: false
         };
+    },
+    asyncData({ params }) {
+        return { url: params };
     },
     computed: {
         ...mapGetters({

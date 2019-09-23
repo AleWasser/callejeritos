@@ -22,6 +22,13 @@
                                 href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=214223563-8b4ed523-df66-4451-9acb-146d432ef03d"
                                 target="_blanck"
                             >Donar $100</v-btn>
+                            <form action="/procesar-pago" method="POST" @submit.prevent="onSubmit">
+                                <script
+                                    src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
+                                    data-public-key="TEST-15f741c8-274e-43a9-bba1-cc2c0a6628b1"
+                                    data-transaction-amount="100.00"
+                                ></script>
+                            </form>
                         </v-flex>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio adipisci rem aperiam, autem expedita reprehenderit similique nam quam, iste iure commodi? Animi, ipsam. Quidem repellendus molestias architecto esse obcaecati ipsa!</p>
@@ -42,22 +49,15 @@
 <script>
 import { mapGetters } from "vuex";
 
-import BlogList from "~/components/blog/BlogList.vue";
-
 export default {
-    components: {
-        "app-blog-list": BlogList
-    },
-    data() {
-        return {
-            colors: ["primary", "secondary", "yellow darken-2", "red", "orange"]
-        };
-    },
     computed: mapGetters({
-        getBreakpoint: "getBreakpoint",
-        getPosts: "blog/getPosts",
-        getSliderPosts: "blog/getSliderPosts"
-    })
+        getBreakpoint: "getBreakpoint"
+    }),
+    methods: {
+        onSubmit(event) {
+            console.log(event);
+        }
+    }
 };
 </script>
 

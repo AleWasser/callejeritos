@@ -9,7 +9,7 @@
                 <v-container fluid grid-list-md>
                     <v-layout row wrap>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
-                            <v-carousel>
+                            <v-carousel height="100%">
                                 <v-carousel-item v-for="post in getSliderPosts" :key="post.id">
                                     <nuxt-link tag="div" :to="'/blog/' + post.id" class="pointer">
                                         <v-img :src="post.imageUrl">
@@ -20,7 +20,9 @@
                                                     row
                                                     fill-height
                                                 >
-                                                    <div class="display-3">{{post.titulo}}</div>
+                                                    <div
+                                                        :class="{'title mt-2': getBreakpoint.smAndDown, 'display-3': getBreakpoint.mdAndUp }"
+                                                    >{{post.titulo}}</div>
                                                 </v-layout>
                                             </v-sheet>
                                         </v-img>

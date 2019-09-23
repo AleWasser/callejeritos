@@ -1,6 +1,6 @@
 <template>
     <v-layout row wrap>
-        <v-flex xs12>
+        <v-flex xs12 my-4>
             <v-card>
                 <v-img
                     :src="post.imageUrl"
@@ -62,8 +62,8 @@
                 <v-card-actions>
                     <p>//Formulario para nuevo comentario</p>
                 </v-card-actions>
-            </v-card> -->
-            <app-share-dialog :sheet="sheet" :closeSheet="closeSheet"></app-share-dialog>
+            </v-card>-->
+            <app-share-dialog :sheet="sheet" :url="url" :closeSheet="closeSheet"></app-share-dialog>
         </v-flex>
     </v-layout>
 </template>
@@ -71,7 +71,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import ShareDialog from "~/components/Adopciones/ShareDialog.vue";
+import ShareDialog from "~/components/Blog/ShareDialog.vue";
 
 export default {
     components: {
@@ -83,6 +83,9 @@ export default {
             loaded: false,
             sheet: false
         };
+    },
+    asyncData({ params }) {
+        return { url: params };
     },
     computed: mapGetters({
         getBreakpoint: "getBreakpoint",

@@ -18,7 +18,7 @@
                     </v-card-title>
                     <v-card-text>
                         <p
-                            class="subheading text-md-center"
+                            class="subheading text-xs-center"
                         >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum minima illo sunt. Fugit, nobis praesentium incidunt aperiam officiis ratione exercitationem, dolorum commodi quo aut pariatur laboriosam, provident sunt consequatur. Debitis?Inventore tempora reprehenderit nam excepturi praesentium error voluptas a facere asperiores eligendi. Quas nobis accusantium eos itaque porro voluptate rerum, quia ab exercitationem cum omnis non, ducimus perferendis, iusto blanditiis.</p>
                     </v-card-text>
                     <v-container grid-list-xl>

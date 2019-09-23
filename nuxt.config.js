@@ -50,6 +50,9 @@ export default {
     },
     {
       src: '~/plugins/tiptap.js'
+    },
+    {
+      src: '~/plugins/mercadopago.js'
     }
   ],
   /*
@@ -88,5 +91,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   }
 }
