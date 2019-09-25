@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-container fluid grid-list-md>
-            <v-layout row wrap>
+            <v-layout row wrap v-if="mascotas.length > 0">
                 <v-flex xs12 md4 v-for="item in mascotas" :key="item.id">
                     <v-card>
                         <v-img
@@ -23,6 +23,9 @@
                         </v-card-actions>
                     </v-card>
                 </v-flex>
+            </v-layout>
+            <v-layout row wrap v-else>
+                <h4 class="display-1">No hay mascotas cargadas en esta categoria</h4>
             </v-layout>
         </v-container>
     </v-card>

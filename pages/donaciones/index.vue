@@ -6,11 +6,11 @@
                 :class="{'display-2': getBreakpoint.smAndDown, 'display-4':getBreakpoint.mdAndUp}"
             >Donaciones</h1>
             <v-card>
-                <v-container fluid grid-list-md>
+                <v-container fluid grid-list-md text-xs-center>
                     <v-layout row wrap>
-                        <v-card-title primary-title>
+                        <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <h3 class="display-1">MercadoPago</h3>
-                        </v-card-title>
+                        </v-flex>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <v-btn
                                 color="primary"
@@ -22,18 +22,11 @@
                                 href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=214223563-8b4ed523-df66-4451-9acb-146d432ef03d"
                                 target="_blanck"
                             >Donar $100</v-btn>
-                            <form action="/procesar-pago" method="POST" @submit.prevent="onSubmit">
-                                <script
-                                    src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
-                                    data-public-key="TEST-15f741c8-274e-43a9-bba1-cc2c0a6628b1"
-                                    data-transaction-amount="100.00"
-                                ></script>
-                            </form>
                         </v-flex>
                         <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio adipisci rem aperiam, autem expedita reprehenderit similique nam quam, iste iure commodi? Animi, ipsam. Quidem repellendus molestias architecto esse obcaecati ipsa!</p>
                         </v-flex>
-                        <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}" text-xs-center>
+                        <v-flex xs12 :class="{'my-1 pa-0': getBreakpoint.smAndDown}">
                             <p>
                                 Tenes dudas?
                                 <nuxt-link to="#">contactanos</nuxt-link>
@@ -52,12 +45,7 @@ import { mapGetters } from "vuex";
 export default {
     computed: mapGetters({
         getBreakpoint: "getBreakpoint"
-    }),
-    methods: {
-        onSubmit(event) {
-            console.log(event);
-        }
-    }
+    })
 };
 </script>
 

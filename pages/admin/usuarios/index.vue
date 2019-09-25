@@ -33,7 +33,7 @@
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent max-width="290">
                 <v-card>
-                    <v-card-title class="headline">¿Esta seguro de eliminar este post?</v-card-title>
+                    <v-card-title class="headline">¿Esta seguro de eliminar este usuario?</v-card-title>
                     <v-card-text>Una vez borrado el mismo no se podra recuperar.</v-card-text>
                     <v-card-actions class="justify-center">
                         <v-btn color="primary" flat @click="dialog = false">Cancelar</v-btn>

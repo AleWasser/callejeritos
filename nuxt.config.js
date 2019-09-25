@@ -50,9 +50,6 @@ export default {
     },
     {
       src: '~/plugins/tiptap.js'
-    },
-    {
-      src: '~/plugins/mercadopago.js'
     }
   ],
   /*
