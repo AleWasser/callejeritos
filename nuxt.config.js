@@ -50,6 +50,9 @@ export default {
     },
     {
       src: '~/plugins/tiptap.js'
+    },
+    {
+      src: '~/plugins/vuelidate.js'
     }
   ],
   /*
