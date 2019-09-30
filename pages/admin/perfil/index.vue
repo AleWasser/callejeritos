@@ -1,7 +1,7 @@
 <template>
     <v-layout row wrap>
         <v-flex xs4 offset-xs4>
-            <form @submit.prevent="onSubmit">
+            <form @submit.prevent="this.$v.touch()">
                 <v-card>
                     <v-card-text class="text-xs-center pb-1">
                         <v-avatar :size="125" color="grey lighten-4">
@@ -15,12 +15,20 @@
                     </v-card-text>
                     <v-layout row wrap v-if="edit">
                         <v-flex xs10 offset-xs1>
+                            <span
+                                v-if="$v.userName.$error"
+                                class="error--text caption"
+                            >Campo requerido</span>
                             <v-text-field
                                 name="nombre"
                                 label="Nombre"
                                 id="nombre"
                                 ref="userName"
                                 v-model="userName"
+                                @blur="$v.userName.$touch()"
+                                :error="$v.userName.$error"
+                                required
+                                class="pt-1 mt-1"
                             ></v-text-field>
                         </v-flex>
                     </v-layout>
@@ -29,6 +37,7 @@
                             color="primary"
                             type="button"
                             @click="onClick"
+                            :disabled="this.$v.$invalid && this.edit"
                         >{{edit ? 'Aceptar' : 'Editar'}}</v-btn>
                     </v-card-actions>
                 </v-card>
@@ -38,6 +47,8 @@
 </template>
 
 <script>
+import { required } from "vuelidate/lib/validators";
+
 export default {
     layout: "admin",
     data() {
@@ -61,6 +72,11 @@ export default {
                     email: this.email
                 });
             }
+        }
+    },
+    validations: {
+        userName: {
+            required
         }
     }
 };
