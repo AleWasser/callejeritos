@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Form from "~/components/blog/Form.vue";
+import Form from "~/components/Blog/Form.vue";
 
 export default {
     layout: "admin",

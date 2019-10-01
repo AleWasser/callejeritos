@@ -28,7 +28,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import AdminBlogList from "~/components/blog/AdminBlogList.vue";
+import AdminBlogList from "~/components/Blog/AdminBlogList.vue";
 
 export default {
     layout: "admin",

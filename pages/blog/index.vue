@@ -49,7 +49,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import BlogList from "~/components/blog/BlogList.vue";
+import BlogList from "~/components/Blog/BlogList.vue";
 
 export default {
     components: {
