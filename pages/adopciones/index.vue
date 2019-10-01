@@ -11,10 +11,7 @@
                         <nuxt-link tag="v-flex" to="/adopciones/perros" class="xs12 md4 pointer">
                             <v-hover>
                                 <v-card slot-scope="{ hover }">
-                                    <v-img
-                                        src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2016%2F01%2F256905-animals-dog-puppies.jpg&f=1"
-                                        aspect-ratio="1"
-                                    >
+                                    <v-img src="https://i.imgur.com/g4osZZK.jpg" aspect-ratio="1">
                                         <h3
                                             v-if="getBreakpoint.smAndDown"
                                             class="display-2 font-weight-bold pl-2"
