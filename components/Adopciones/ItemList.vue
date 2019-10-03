@@ -2,6 +2,26 @@
     <v-card>
         <v-container fluid grid-list-md>
             <v-layout row wrap v-if="mascotas.length > 0">
+                <v-flex xs12>
+                    <v-btn color="grey lighten-2" @click="filtros = !filtros">
+                        <v-icon class="mr-2">filter_list</v-icon>Filtros
+                    </v-btn>
+                    <v-slide-y-reverse-transition class="ma-2">
+                        <v-card v-show="filtros" color="grey lighten-2">
+                            <v-container grid-list-xs>
+                                <v-layout row wrap>
+                                    <v-flex xs4>
+                                        <v-select
+                                            :items="getCiudades"
+                                            @change="filtrar"
+                                            label="Ciudad"
+                                        ></v-select>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card>
+                    </v-slide-y-reverse-transition>
+                </v-flex>
                 <v-flex xs12 md4 v-for="item in mascotas" :key="item.id">
                     <v-card>
                         <v-img
@@ -32,12 +52,25 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
     props: ["mascotas"],
     data() {
         return {
-            loaded: false
+            loaded: false,
+            filtros: false,
+            filtrado: []
         };
-    }
+    },
+    methods: {
+        filtrar(e) {
+            this.filtrado = this.filtrarCiudad(this.$route.params.categoria, e);
+        }
+    },
+    computed: mapGetters({
+        getCiudades: "adopciones/getCiudades",
+        filtrarCiudad: "adopciones/filtrarCiudad"
+    })
 };
 </script>

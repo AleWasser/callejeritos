@@ -43,6 +43,9 @@
                                 readonly
                             ></v-text-field>
                         </v-flex>
+                        <v-flex xs12>
+                            <v-text-field :value="contacto.ciudad" label="Ciudad" outline readonly></v-text-field>
+                        </v-flex>
                     </v-layout>
                 </v-container>
             </v-card-text>

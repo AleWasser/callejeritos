@@ -1,6 +1,5 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <pre>{{datos}}</pre>
         <v-container grid-list-xs>
             <v-layout row wrap>
                 <v-flex xs6>
@@ -22,7 +21,12 @@
                         accept="image/*"
                         @change="onFilePicked"
                     />
-                    <v-btn raised color="info" @click="onPickFile">Seleccionar una imagen</v-btn>
+                    <v-btn
+                        raised
+                        color="info"
+                        @click="onPickFile"
+                        class="mb-3"
+                    >Seleccionar una imagen</v-btn>
                 </v-flex>
                 <v-flex xs12>
                     <tiptap-vuetify v-model="datos.contenido" :extensions="extensions" />

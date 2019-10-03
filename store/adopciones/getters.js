@@ -29,5 +29,35 @@ export default {
   },
   getCategorias(state) {
     return state.categorias;
+  },
+  getCiudades(state) {
+    return state.ciudades;
+  },
+  filtrarCiudad: (state) => (mascota, ciudad) => {
+    let mascotas = [];
+
+    switch (mascota) {
+      case "perros":
+        mascotas = [...state.perros];
+        break;
+
+      case "gatos":
+        mascotas = [...state.gatos];
+        break;
+
+      case "otros":
+        mascotas = [...state.otros];
+        break;
+
+      default:
+        return false;
+        break;
+    }
+
+    if (mascotas) {
+      return mascotas.find((element) => {
+        return element.contacto.ciudad == ciudad;
+      });
+    }
   }
 }

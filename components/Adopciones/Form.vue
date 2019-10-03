@@ -47,6 +47,9 @@
                     <v-flex xs6>
                         <v-text-field v-model="contacto.telefono" name="Telefono" label="Telefono"></v-text-field>
                     </v-flex>
+                    <v-flex xs12>
+                        <v-select :items="getCiudades" v-model="contacto.ciudad" label="Ciudad"></v-select>
+                    </v-flex>
                 </v-layout>
             </v-container>
         </v-container>
@@ -111,6 +114,7 @@ export default {
             // previewImage: "",
             previewTitle: "",
             image: null,
+            ciudades: ["Adrogue", "Burzaco", "Rafael Calzada"],
             extensions: [
                 new Heading({
                     levels: [1, 2]
@@ -186,7 +190,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getCategorias: "adopciones/getCategorias"
+            getCategorias: "adopciones/getCategorias",
+            getCiudades: "adopciones/getCiudades"
         }),
         datos() {
             return {
