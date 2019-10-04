@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit">
+        <pre>{{datos}}</pre>
         <input type="hidden" name="id" v-model="datos.id" />
         <v-container grid-list-xs v-if="datos.tipo != 'delete'">
             <v-layout row wrap>
@@ -50,26 +51,12 @@
                     <v-flex xs12>
                         <v-select :items="getCiudades" v-model="contacto.ciudad" label="Ciudad"></v-select>
                     </v-flex>
+                    <v-flex xs12 class="text-xs-center">
+                        <v-btn color="success" type="submit">{{this.edit ? 'Actualizar' : 'Crear'}}</v-btn>
+                    </v-flex>
                 </v-layout>
             </v-container>
         </v-container>
-        <v-container grid-list-xs v-else>
-            <v-layout row wrap>
-                <v-flex xs12 class="text-xs-center">
-                    <p class="subheading font-weight-medium">¿Esta seguro de eliminar esta mascota?</p>
-                </v-flex>
-            </v-layout>
-        </v-container>
-
-        <v-card-actions class="justify-center">
-            <v-btn
-                color="success"
-                type="submit"
-                @click="closeHandler"
-                v-if="datos.tipo != 'delete'"
-            >Enviar</v-btn>
-            <v-btn color="error" type="submit" @click="closeHandler" v-else>Eliminar</v-btn>
-        </v-card-actions>
     </form>
 </template>
 
@@ -94,9 +81,16 @@ import {
 
 export default {
     props: {
-        datosAdopcion: {
+        mascota: {
             type: Object,
-            required: false
+            required: false,
+            default() {
+                return {
+                    nombre: "",
+                    email: "",
+                    password: ""
+                };
+            }
         },
         categoria: {
             type: String,
@@ -106,6 +100,11 @@ export default {
         close: {
             type: Function,
             required: false
+        },
+        edit: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
     components: { TiptapVuetify },
@@ -114,7 +113,6 @@ export default {
             // previewImage: "",
             previewTitle: "",
             image: null,
-            ciudades: ["Adrogue", "Burzaco", "Rafael Calzada"],
             extensions: [
                 new Heading({
                     levels: [1, 2]
@@ -137,19 +135,16 @@ export default {
     methods: {
         ...mapActions({
             createMascota: "adopciones/createMascota",
-            editMascota: "adopciones/editMascota",
-            deleteMascota: "adopciones/deleteMascota"
+            editMascota: "adopciones/editMascota"
         }),
         onSubmit() {
-            if (this.datos.tipo == "create") {
-                delete this.datos.tipo;
+            if (!this.edit) {
                 this.createMascota({
                     ...this.datos,
                     contacto: this.contacto,
                     imagen: this.image
                 });
-            } else if (this.datos.tipo == "edit") {
-                delete this.datos.tipo;
+            } else {
                 let datos = {
                     ...this.datos,
                     contacto: this.contacto,
@@ -157,15 +152,7 @@ export default {
                     deleteData: this.categoria
                 };
                 this.editMascota(datos);
-            } else {
-                delete this.datos.tipo;
-                this.deleteMascota(this.datos);
             }
-            this.resetDatos;
-        },
-        closeHandler() {
-            this.close();
-            this.resetDatos();
         },
         onPickFile() {
             this.$refs.fileInput.click();
@@ -182,10 +169,6 @@ export default {
             // });
             // fileReader.readAsDataURL(files[0]);
             this.image = files[0];
-        },
-        resetDatos() {
-            delete this.datos;
-            this.imageUrl = "";
         }
     },
     computed: {
@@ -195,17 +178,13 @@ export default {
         }),
         datos() {
             return {
-                ...this.datosAdopcion.data,
-                tipo: this.datosAdopcion.tipo
+                ...this.mascota
             };
         },
         contacto() {
-            if (this.datosAdopcion.data) {
-                return {
-                    ...this.datosAdopcion.data.contacto
-                };
-            }
-            return {};
+            return {
+                ...this.mascota.contacto
+            };
         }
     }
 };

@@ -4,13 +4,7 @@
             <v-card-title primary-title>
                 <h3 class="display-1">Adopciones</h3>
                 <v-spacer></v-spacer>
-                <v-btn
-                    fab
-                    icon
-                    color="success"
-                    class="justify-end"
-                    @click="openAddDialog('create')"
-                >
+                <v-btn fab icon color="success" class="justify-end" to="/admin/adopciones/create">
                     <v-icon>add</v-icon>
                 </v-btn>
             </v-card-title>
@@ -22,38 +16,38 @@
                     <td>{{ props.item.categoria }}</td>
                     <td>{{ props.item.contacto.nombre }}</td>
                     <td>
-                        <v-icon small class="mr-2" @click="openEditDialog('edit',props.item)">edit</v-icon>
-                        <v-icon small @click="openDeleteDialog('delete', props.item)">delete</v-icon>
+                        <v-btn
+                            flat
+                            icon
+                            color="primary"
+                            :to="'/admin/adopciones/edit/' + props.item.id"
+                        >
+                            <v-icon small>edit</v-icon>
+                        </v-btn>
+                        <v-btn flat icon color="error" @click="openDelete(props.item)">
+                            <v-icon small>delete</v-icon>
+                        </v-btn>
                     </td>
                 </template>
             </v-data-table>
         </v-card>
-        <v-dialog v-model="dialog" max-width="800px" transition="dialog-transition">
-            <v-card>
-                <v-card-title primary-title>
-                    <div>
-                        <h3 class="headline mb-0">Adopcion</h3>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn flat icon color="error" @click="dialog = false">
-                        <v-icon>close</v-icon>
-                    </v-btn>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text>
-                    <app-adopcion-form
-                        :close="closeDialog"
-                        :datosAdopcion="datosAdopcion"
-                        :categoria="deleteData"
-                    ></app-adopcion-form>
-                </v-card-text>
-            </v-card>
-        </v-dialog>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent max-width="290">
+                <v-card>
+                    <v-card-title class="headline">¿Esta seguro de eliminar este usuario?</v-card-title>
+                    <v-card-text>Una vez borrado el mismo no se podra recuperar.</v-card-text>
+                    <v-card-actions class="justify-center">
+                        <v-btn color="primary" flat @click="dialog = false">Cancelar</v-btn>
+                        <v-btn color="primary" flat @click="deleteItem">Aceptar</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-layout>
     </v-flex>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 import Form from "~/components/Adopciones/Form.vue";
 
@@ -97,21 +91,16 @@ export default {
         getAdopciones: "adopciones/getAdopciones"
     }),
     methods: {
-        closeDialog() {
+        ...mapActions({
+            deleteMascota: "adopciones/deleteMascota"
+        }),
+        openDelete(data) {
+            this.deleteData = data;
+            this.dialog = true;
+        },
+        deleteItem() {
+            this.deleteMascota(this.deleteData);
             this.dialog = false;
-        },
-        openEditDialog(tipo, data) {
-            this.dialog = true;
-            this.deleteData = data.categoria;
-            this.datosAdopcion = { tipo, data, contacto: data.contacto };
-        },
-        openDeleteDialog(tipo, data) {
-            this.dialog = true;
-            this.datosAdopcion = { tipo, data };
-        },
-        openAddDialog(tipo) {
-            this.dialog = true;
-            this.datosAdopcion = { tipo, imageUrl: "" };
         }
     }
 };

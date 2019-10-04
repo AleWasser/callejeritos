@@ -22,6 +22,7 @@ export default {
         } else {
           dispatch('storeMascotas');
         }
+        this.$router.push('/admin/adopciones');
         commit('setNotification', {
           text: 'Adopcion creada',
           color: 'success'
@@ -61,6 +62,7 @@ export default {
                 });
               }
               dispatch('storeMascotas');
+              this.$router.push('/admin/adopciones');
               commit('setNotification', {
                 text: 'Adopcion editada',
                 color: 'success'
