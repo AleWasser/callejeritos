@@ -8,6 +8,7 @@
         </v-toolbar-items>
         <v-spacer></v-spacer>
         <v-toolbar-items>
+            <v-btn flat to="/">Home</v-btn>
             <v-btn flat @click="onClick">Logout</v-btn>
         </v-toolbar-items>
     </v-toolbar>

@@ -51,6 +51,11 @@ export default {
                     icon: "accessibility",
                     title: "Mi perfil",
                     link: "/admin/perfil/"
+                },
+                {
+                    icon: "home",
+                    title: "Volver al sitio",
+                    link: "/"
                 }
             ]
         };
